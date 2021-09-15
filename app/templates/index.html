@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1>Welcome to the Polis conversation!</h1>
 {% if current_user.is_anonymous %}
 <a href="{{ url_for('register') }}">Register to begin!</a>
 {% else %}
