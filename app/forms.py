@@ -57,7 +57,8 @@ class RegistrationForm(MyBaseForm, FlaskForm):
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Correo electrónico', validators=[DataRequired(), Email()])
+    email = StringField('Correo electrónico', 
+                        validators=[DataRequired(), Email()])
     submit = SubmitField('Solicitar cambio de clave')
 
 

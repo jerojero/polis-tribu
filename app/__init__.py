@@ -15,6 +15,9 @@ from flask_mail import Mail
 # CSS/Bootstrap
 from flask_bootstrap import Bootstrap
 
+# Internationalization
+from flask import request
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -26,6 +29,10 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 
 from app import routes, models, errors  # noqa
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if not app.debug:
