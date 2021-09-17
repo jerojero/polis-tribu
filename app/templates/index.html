@@ -1,10 +1,37 @@
 {% extends "base.html" %}
 
+{# CSS ID: We have the ID descriptioin which should be used for the
+description of the website.
+
+CSS classes: We have the call_to_action class to specify a button
+that will take people somewhere meaninful #}
+
 {% block content %}
+
 <h1>Welcome to the Polis conversation!</h1>
+
+<div id="description">
+	<h2>description of the Project</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, temporibus. Distinctio, blanditiis, ipsam. Voluptatum soluta magni, omnis natus quaerat, officiis earum. Ipsa rerum, nostrum esse eligendi possimus nisi voluptas tenetur?</p>
+</div>
+
 {% if current_user.is_anonymous %}
-<a href="{{ url_for('register') }}">Register to begin!</a>
+<div class="call_to_action">
+	<a href="{{ url_for('register') }}">Register to begin!</a><br>
+	<a href="{{ url_for('login') }}" class="MUTED_ACTION">Already registered? Login</a>
+</div>
+
 {% else %}
-<a href="{{ url_for('polis') }}">Polis</a>
+<div class="call_to_action">
+	<a href="{{ url_for('instructions') }}">Continue to Polis</a>
+</div>
+
 {% endif %}
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{# CSS: call_to_action, responsive_iframe #}
+
+{% block content %}
+	<h1>Watch this short video to learn how to use polis</h1>
+	<iframe class="responsive_iframe" width="1440" height="593" src="https://www.youtube.com/embed/tvqlt7OWTOk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<br>
+	<p>
+		{% if current_user.is_anonymous %}
+		<a href="{{ url_for('register') }}" class="muted_action">Registrate</a> o 
+		<a href="{{ url_for('login') }}" class="muted_action"> login</a> para comenzar.
+		{% else %}
+		<a href="{{ url_for('polis') }}" class="call_to_action">Estoy listo!</a>
+		{% endif %}
+	</p>
+{% endblock %}

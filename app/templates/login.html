@@ -20,4 +20,8 @@
 			{{ form.submit() }}
 		</p>
 	</form>
+	<p>
+		Forgot Password?
+		<a href="{{ url_for('reset_password_request') }}" class="muted_action">Click to Reset It</a>
+	</p>
 {% endblock %}

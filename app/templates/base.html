@@ -6,15 +6,17 @@
 	<title>Polis Tribu</title>
 </head>
 <body>
-	<div>
+	<nav>
 		Menu: 
-		<a href="{{ url_for('index') }}">Home</a>
+		<a href="{{ url_for('index') }}">Inicio</a>
+		<a href="{{ url_for('instructions') }}">Instrucciones</a>
 		{% if current_user.is_anonymous %}
 		<a href="{{ url_for('login') }}">Login</a>
 		{% else %}
 		<a href="{{ url_for('logout') }}">Logout</a>
 		{% endif %}
-	</div>
+	</nav>
+	<hr>
 	{% block content %}
 	{% endblock %}
 </body>

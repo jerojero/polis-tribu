@@ -26,6 +26,13 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.verification_code.label }}<br>
+            {{ form.verification_code(size=64) }}<br>
+            {% for error in form.verification_code.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
             {% for error in form.password.errors %}
