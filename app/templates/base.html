@@ -1,23 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Polis Tribu</title>
-</head>
-<body>
-	<nav>
-		Menu: 
-		<a href="{{ url_for('index') }}">Inicio</a>
-		<a href="{{ url_for('instructions') }}">Instrucciones</a>
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block title %}
+	Bienvenido a Polis!
+{% endblock %}
+
+{% block navbar %}
+	<nav class="navbar navbar-default text-right" style="padding: 0 0 1% 0;">
+		<br>
+		<a href="{{ url_for('index') }}" class="btn btn-info btn-lg" style="margin-right: 1%;">Inicio</a>
+		<a href="{{ url_for('instructions') }}" class="btn btn-info btn-lg" style="margin-right: 1%;">Instrucciones</a>
 		{% if current_user.is_anonymous %}
-		<a href="{{ url_for('login') }}">Login</a>
+		<a href="{{ url_for('register') }}" class="btn btn-info btn-lg" style="margin-right: 1%;">Registrarse</a>
+		<a href="{{ url_for('login') }}" class="btn btn-info btn-lg" style="margin-right: 5%;">Iniciar Sesión</a>
 		{% else %}
-		<a href="{{ url_for('logout') }}">Logout</a>
+		<a href="{{ url_for('logout') }}" class="btn btn-info btn-lg" style="margin-right: 5%;">Cerrar Sesión</a>
 		{% endif %}
 	</nav>
-	<hr>
-	{% block content %}
-	{% endblock %}
-</body>
-</html>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-info" role="alert">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+		{% endwith %}
+
+		{% block app_content %}
+		{% endblock %}
+	</div>
+{% endblock %}

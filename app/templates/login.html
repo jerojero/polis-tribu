@@ -1,27 +1,16 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
-	<h1>Sign In</h1>
-	<form action="" method="post" novalidate>
-		{{ form.hidden_tag() }}
-		<p>
-			{{ form.username.label }}<br>
-			{{ form.username(size=32) }}
-		</p>
-		<p>
-			{{ form.password.label }}<br>
-			{{ form.password(size=32) }}
-		</p>
-		<p>
-			{{ form.remember_me() }}
-			{{ form.remember_me.label }}
-		</p>
-		<p>
-			{{ form.submit() }}
-		</p>
-	</form>
+{% block app_content %}
+	<h1>Inicia sesión</h1>
+	 <div class="row">
+ 		<div class="col-md-4">
+ 			{{ wtf.quick_form(form) }}
+ 		</div>
+ 	</div>
+ 	<br>
 	<p>
-		Forgot Password?
-		<a href="{{ url_for('reset_password_request') }}" class="muted_action">Click to Reset It</a>
+		Te olvidaste de tu contraseña?
+		<a href="{{ url_for('reset_password_request') }}" class="muted_action">Apreta acá para restaurarla</a>
 	</p>
 {% endblock %}

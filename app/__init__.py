@@ -12,6 +12,8 @@ from logging.handlers import SMTPHandler
 from logging.handlers import RotatingFileHandler
 from flask_mail import Mail
 
+# CSS/Bootstrap
+from flask_bootstrap import Bootstrap
 
 
 app = Flask(__name__)
@@ -21,6 +23,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 babel = Babel(app)
 mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 from app import routes, models, errors  # noqa
 

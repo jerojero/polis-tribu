@@ -11,54 +11,58 @@ class MyBaseForm(FlaskForm):
 
 
 class LoginForm(MyBaseForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField('Nombre de usuario', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    remember_me = BooleanField('Recuérdame')
+    submit = SubmitField('Inicia sesión')
 
 
 class RegistrationForm(MyBaseForm, FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    email2 = StringField('Repeat Email', validators=[
+    username = StringField('Nombre de usuario', validators=[DataRequired()])
+    email = StringField('Correo electrónico', validators=[DataRequired(),
+                                                          Email()])
+    email2 = StringField('Repetir correo electrónico', validators=[
                          DataRequired(), EqualTo('email')])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    verification_code = StringField('Verification Code',
+        'Repetir contraseña', validators=[DataRequired(), EqualTo('password')])
+    verification_code = StringField('Codigo de verificación',
                                     validators=[DataRequired()])
-    submit = SubmitField('Register')
+    submit = SubmitField('Registrarse')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
-            raise ValidationError('Please use a different username.')
+            raise ValidationError('Este nombre de usuario ya está registrado.'
+                                  ' Porfavor elegir otro'
+                                  ' nombre de usuario')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Please use a different email address.')
+            raise ValidationError('Este correo electrónico ya está siendo '
+                                  'utilizado. Por favor use otra dirección de '
+                                  'correo electrónico.')
 
     def validate_verification_code(self, verification_code):
         lxs400 = Lxs400.query.filter_by(
                     verification_code=verification_code.data).first()
         if lxs400 is None:
-            raise ValidationError('Please use a valid verification code.')
+            raise ValidationError('Código de verificación no es válido.')
 
         if User.query.filter_by(lxs400_vc=verification_code.data).first():
-            raise ValidationError("Someone is already using" 
-                                  " this verification code."
-                                  " Please contact an administrator.")
+            raise ValidationError("Alguien ya está usando este código de " 
+                                  "verificación. Porfavor contacte al "
+                                  "administrador.")
 
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
+    email = StringField('Correo electrónico', validators=[DataRequired(), Email()])
+    submit = SubmitField('Solicitar cambio de clave')
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Request Password Reset')
-
+        'Repetir contraseña', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Guardar')

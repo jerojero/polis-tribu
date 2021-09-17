@@ -42,7 +42,8 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email for the intructions to reset your password')
+        flash('Revise su correo electrónico con instrucciones para '
+              'cambiar su contraseña.')
         return redirect(url_for('login'))
     return render_template('reset_password_request.html', form=form)
 
@@ -76,7 +77,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations you are not a registered user.')
+        flash('Felicitaciones, usted se ha registrado.')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
