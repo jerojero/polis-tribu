@@ -11,7 +11,6 @@ import string
 # Password reset
 from time import time
 import jwt
-from app import app
 
 
 class User(UserMixin, db.Model):

@@ -34,13 +34,13 @@ that will take people somewhere meaninful #}
 <br>
 {% if current_user.is_anonymous %}
 <div class="text-center">
-	<a href="{{ url_for('register') }}" class="btn btn-info">Registrate para empezar!</a><br>
-	<a href="{{ url_for('login') }}" class="small">Ya tienes un usuario? Inicia sesión</a>
+	<a href="{{ url_for('auth.register') }}" class="btn btn-info">Registrate para empezar!</a><br>
+	<a href="{{ url_for('auth.login') }}" class="small">Ya tienes un usuario? Inicia sesión</a>
 </div>
 
 {% else %}
 <div class="text-center">
-	<a href="{{ url_for('instructions') }}" class="btn btn-lg btn-info">Continue a Polis</a>
+	<a href="{{ url_for('main.instructions') }}" class="btn btn-lg btn-info">Continue a Polis</a>
 </div>
 
 {% endif %}

@@ -12,10 +12,10 @@
 	<br>
 	<p class="text-center">
 		{% if current_user.is_anonymous %}
-		<a href="{{ url_for('register') }}" class="muted_action">Registrate</a> o 
-		<a href="{{ url_for('login') }}" class="muted_action"> Inicia sesión</a> para comenzar.
+		<a href="{{ url_for('auth.register') }}" class="muted_action">Registrate</a> o 
+		<a href="{{ url_for('auth.login') }}" class="muted_action"> Inicia sesión</a> para comenzar.
 		{% else %}
-		<a href="{{ url_for('polis') }}" class="btn btn-lg btn-info">Estoy listo!</a>
+		<a href="{{ url_for('main.polis') }}" class="btn btn-lg btn-info">Estoy listo!</a>
 		{% endif %}
 	</p>
 	</div>
