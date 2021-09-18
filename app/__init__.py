@@ -28,7 +28,13 @@ babel = Babel(app)
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 
-from app import routes, models, errors  # noqa
+
+# Error Blueprints
+from app.errors import bp as errors_bp  # noqa
+app.register_blueprint(errors_bp)
+
+
+from app import routes, models  # noqa
 
 @babel.localeselector
 def get_locale():
