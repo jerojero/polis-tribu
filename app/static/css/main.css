@@ -29,3 +29,13 @@
 .right-space-large {
   margin-right: 8%;
 }
+
+.container {
+  background: #fff;
+  padding-bottom: 2em;
+}
+
+body {
+  background-image: url("/static/images/w_consulta_b_small.jpg");
+  background-repeat: space;
+}
