@@ -29,6 +29,9 @@ SQLAlchemy = "==1.4.23"
 Werkzeug = "==2.0.1"
 WTForms = "==2.3.3"
 flask-bootstrap = "*"
+gunicorn = "*"
+pymysql = "*"
+cryptography = "*"
 
 [dev-packages]
 
