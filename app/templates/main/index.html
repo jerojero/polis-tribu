@@ -1,49 +1,22 @@
 {% extends "base.html" %}
 
-{# CSS ID: We have the ID descriptioin which should be used for the
-description of the website.
-
-CSS classes: We have the call_to_action class to specify a button
-that will take people somewhere meaninful #}
+{# CSS: call_to_action, responsive_iframe #}
 
 {% block app_content %}
-
-<h1>
-	Bienvenid@ a la conversación de Polis!<br>
-	<small>Este proyecto consiste en...</small>
-</h1>
-<br>
-<br>
-<div id="description">
-	<p><span class="disappear">Lorem</span> ipsum dolor sit amet, <mark>texto muy importante</mark> elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum <mark>otro texto importante</mark> pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	<div class="text-center sm-query">
+	<h1>Bienvenid@ a la conversación de Polis!</h1>
+	<br>
+	<div class="video-container">
+		<iframe class="responsive-iframe" src="https://www.youtube.com/embed/t3Fq5JrfnRw" title="Instrucciones Polis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<br>
+	<p class="text-center">
+		{% if current_user.is_anonymous %}
+		<a href="{{ url_for('auth.register') }}" class="muted_action">Registrate</a> o 
+		<a href="{{ url_for('auth.login') }}" class="muted_action"> Inicia sesión</a> para comenzar.
+		{% else %}
+		<a href="{{ url_for('main.instructions') }}" class="btn btn-lg btn-info">Estoy listo!</a>
+		{% endif %}
 	</p>
-	<br>
-	<blockquote>
-  		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-  		<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-	</blockquote>
-	<br>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, temporibus. Distinctio, blanditiis, ipsam. Voluptatum soluta magni, omnis natus quaerat, officiis earum. Ipsa rerum, nostrum esse eligendi possimus nisi <mark>ultimo texto importante?</mark></p>
-
-	<br>
-	<br>
-	{% if current_user.is_anonymous %}
-	<div class="text-center">
-		<a href="{{ url_for('auth.register') }}" class="btn btn-large btn-info">Registrate para empezar!</a><br>
-		<a href="{{ url_for('auth.login') }}" class="small">Ya tienes un usuario? Inicia sesión</a>
 	</div>
-
-	{% else %}
-	<div class="text-center">
-		<a href="{{ url_for('main.instructions') }}" class="btn btn-lg btn-info">Continue a Polis</a>
-	</div>
-
-</div>
-
-{% endif %}
 {% endblock %}

@@ -16,19 +16,9 @@
   right: 0;
   width: 100%;
   height: 100%;
+  border: none;
 }
 
-.right-space-small {
-  margin-right: 2%;
-}
-
-.right-space-medium {
-  margin-right: 5%;
-}
-
-.right-space-large {
-  margin-right: 8%;
-}
 
 .container {
   background: #fff;
@@ -38,6 +28,7 @@
 }
 
 h1 {
+    color: #6c9ae6;
     text-transform: uppercase;
     font-weight: 900;
 }
@@ -98,6 +89,6 @@ body {
   }
 
   .sm-query h1 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
   }
 }
