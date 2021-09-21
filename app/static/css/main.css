@@ -32,10 +32,53 @@
 
 .container {
   background: #fff;
-  padding-bottom: 2em;
+  padding: 2em;
+  border-radius: 2em;
+  box-shadow: 1em 1em black;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-weight: 900;
+  background-image: linear-gradient(45deg, #6c9ae6, #665dd5);
+  background-size: 500%;
+  background-clip: text;
+  color: transparent;
+  animation: bg-animation 20s infinite alternate;
+  /*text-shadow: 0.2rem 0.2rem black;*/
+}
+
+h2 {
+  text-transform: uppercase;
+}
+
+.navbar {
+  background: transparent;
+  border: none;
+}
+
+.navbar .btn {
+  border: none;
+  margin: 0.5em;
+  /*box-shadow: 0.5rem 0.5rem 1rem darkgray;*/
+}
+
+.btn-info {
+  background: #665dd5;
+  border-radius: none;
 }
 
 body {
-  background-image: url("/static/images/w_consulta_b_small.jpg");
-  background-repeat: space;
+  background-image: linear-gradient(45deg, #6c9ae6, #665dd5);
+  background-size: 2200% 2200%;
+  animation: bg-animation 20s infinite alternate;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
 }

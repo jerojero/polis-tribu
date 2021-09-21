@@ -10,15 +10,15 @@
 {% endblock %}
 
 {% block navbar %}
-	<nav class="navbar navbar-default text-right" style="padding: 0 0 1% 0;">
+	<nav class="navbar navbar-default text-center" style="padding: 0 0 1% 0;">
 		<br>
-		<a href="{{ url_for('main.index') }}" class="btn btn-info btn-lg" style="margin-right: 1%;">Inicio</a>
-		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg" style="margin-right: 1%;">Instrucciones</a>
+		<a href="{{ url_for('main.index') }}" class="btn btn-info btn-lg" >Inicio</a>
+		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg" >Instrucciones</a>
 		{% if current_user.is_anonymous %}
-		<a href="{{ url_for('auth.register') }}" class="btn btn-info btn-lg" style="margin-right: 1%;">Registrarse</a>
-		<a href="{{ url_for('auth.login') }}" class="btn btn-info btn-lg" style="margin-right: 5%;">Iniciar Sesión</a>
+		<a href="{{ url_for('auth.register') }}" class="btn btn-info btn-lg" >Registrarse</a>
+		<a href="{{ url_for('auth.login') }}" class="btn btn-info btn-lg" >Iniciar Sesión</a>
 		{% else %}
-		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg" style="margin-right: 5%;">Cerrar Sesión</a>
+		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg">Cerrar Sesión</a>
 		{% endif %}
 	</nav>
 {% endblock %}
