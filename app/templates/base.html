@@ -34,7 +34,7 @@
 
 		<a href="{{ url_for('auth.login') }}" class="btn btn-info btn-lg
 		{{ 'active' if request.path == url_for('auth.login') else '' }}" >
-		<i class="fa fa-user-circle"></i> <span class="disappear">Iniciar Sesión</span></a>
+		<i class="fa fa-user-circle"></i> Iniciar Sesión</a>
 		{% else %}
 		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg
 		{{ 'active' if request.path == url_for('auth.logout') else '' }}">

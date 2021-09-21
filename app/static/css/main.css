@@ -38,14 +38,19 @@
 }
 
 h1 {
-  text-transform: uppercase;
-  font-weight: 900;
-  background-image: linear-gradient(45deg, #6c9ae6, #665dd5);
-  background-size: 500%;
-  background-clip: text;
-  color: transparent;
-  animation: bg-animation 20s infinite alternate;
-  /*text-shadow: 0.2rem 0.2rem black;*/
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+@supports (background-clip: text) {
+  h1 {
+
+    background-image: linear-gradient(45deg, #6c9ae6, #665dd5);
+    background-size: 500%;
+    background-clip: text;
+    color: transparent;
+    animation: bg-animation 20s infinite alternate;
+  }
 }
 
 h2 {
@@ -60,7 +65,6 @@ h2 {
 .navbar .btn {
   border: none;
   margin: 0.5em;
-  /*box-shadow: 0.5rem 0.5rem 1rem darkgray;*/
 }
 
 mark {
