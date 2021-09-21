@@ -20,20 +20,25 @@
 	<nav class="navbar navbar-default text-center" style="padding: 0 0 1% 0;">
 		<br>
 		<a href="{{ url_for('main.index') }}" class="btn btn-info btn-lg 
-		{{ 'active' if request.path == url_for('main.index') else '' }}" ><i class="fas fa-home"></i>Inicio</a>
+		{{ 'active' if request.path == url_for('main.index') else '' }}" >
+		<i class="fa fa-home"></i> <span class="disappear">Inicio</span></a>
 
 		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg
-		{{ 'active' if request.path == url_for('main.instructions') else '' }}" >Instrucciones</a>
+		{{ 'active' if request.path == url_for('main.instructions') else '' }}" >
+	    <i class="fa fa-book"></i> <span class="disappear">Instrucciones</span></a>
 
 		{% if current_user.is_anonymous %}
 		<a href="{{ url_for('auth.register') }}" class="btn btn-info btn-lg
-		{{ 'active' if request.path == url_for('auth.register') else '' }}" >Registrarse</a>
+		{{ 'active' if request.path == url_for('auth.register') else '' }}" >
+		<i class="fa fa-user-plus"></i> <span class="disappear">Registrarse</span></a>
 
 		<a href="{{ url_for('auth.login') }}" class="btn btn-info btn-lg
-		{{ 'active' if request.path == url_for('auth.login') else '' }}" >Iniciar Sesión</a>
+		{{ 'active' if request.path == url_for('auth.login') else '' }}" >
+		<i class="fa fa-user-circle"></i> <span class="disappear">Iniciar Sesión</span></a>
 		{% else %}
 		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg
-		{{ 'active' if request.path == url_for('auth.logout') else '' }}">Cerrar Sesión</a>
+		{{ 'active' if request.path == url_for('auth.logout') else '' }}">
+		<i class="fa fa-user-times"></i> <span class="disappear">Cerrar Sesión</span></a>
 		{% endif %}
 	</nav>
 {% endblock %}

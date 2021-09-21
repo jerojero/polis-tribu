@@ -63,10 +63,6 @@ h2 {
   /*box-shadow: 0.5rem 0.5rem 1rem darkgray;*/
 }
 
-.fa, .far, .fas {
-    font-family: "Font Awesome 5 Free";
-}
-
 mark {
   background-color: #b4cffb;
 }
@@ -88,5 +84,16 @@ body {
   }
   100% {
     background-position: right;
+  }
+}
+
+@media (max-width: 768px) {
+  .disappear {
+    position: absolute;
+    left: -999px; 
+  }
+
+  .sm-query h1 {
+    font-size: 1.5rem;
   }
 }
