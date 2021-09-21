@@ -63,6 +63,14 @@ h2 {
   /*box-shadow: 0.5rem 0.5rem 1rem darkgray;*/
 }
 
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+}
+
+mark {
+  background-color: #b4cffb;
+}
+
 .btn-info {
   background: #665dd5;
   border-radius: none;

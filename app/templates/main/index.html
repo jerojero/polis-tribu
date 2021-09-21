@@ -20,7 +20,7 @@ that will take people somewhere meaninful #}
 		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 		cillum <mark>otro texto importante</mark> pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum <i class="fas fa-home"></i> <i class="fas fa-clock"></i>.
 	</p>
 	<br>
 	<blockquote>
@@ -29,18 +29,20 @@ that will take people somewhere meaninful #}
 	</blockquote>
 	<br>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, temporibus. Distinctio, blanditiis, ipsam. Voluptatum soluta magni, omnis natus quaerat, officiis earum. Ipsa rerum, nostrum esse eligendi possimus nisi <mark>ultimo texto importante?</mark></p>
-</div>
-<br>
-<br>
-{% if current_user.is_anonymous %}
-<div class="text-center">
-	<a href="{{ url_for('auth.register') }}" class="btn btn-info">Registrate para empezar!</a><br>
-	<a href="{{ url_for('auth.login') }}" class="small">Ya tienes un usuario? Inicia sesión</a>
-</div>
 
-{% else %}
-<div class="text-center">
-	<a href="{{ url_for('main.instructions') }}" class="btn btn-lg btn-info">Continue a Polis</a>
+	<br>
+	<br>
+	{% if current_user.is_anonymous %}
+	<div class="text-center">
+		<a href="{{ url_for('auth.register') }}" class="btn btn-large btn-info">Registrate para empezar!</a><br>
+		<a href="{{ url_for('auth.login') }}" class="small">Ya tienes un usuario? Inicia sesión</a>
+	</div>
+
+	{% else %}
+	<div class="text-center">
+		<a href="{{ url_for('main.instructions') }}" class="btn btn-lg btn-info">Continue a Polis</a>
+	</div>
+
 </div>
 
 {% endif %}

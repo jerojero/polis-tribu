@@ -1,9 +1,16 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block head %}
+	{{ super() }}
+	<script src="https://use.fontawesome.com/e9d9405e58.js" crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block styles %}
 	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
+
+
 
 {% block title %}
 	Bienvenido a Polis!
@@ -12,13 +19,21 @@
 {% block navbar %}
 	<nav class="navbar navbar-default text-center" style="padding: 0 0 1% 0;">
 		<br>
-		<a href="{{ url_for('main.index') }}" class="btn btn-info btn-lg" >Inicio</a>
-		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg" >Instrucciones</a>
+		<a href="{{ url_for('main.index') }}" class="btn btn-info btn-lg 
+		{{ 'active' if request.path == url_for('main.index') else '' }}" ><i class="fas fa-home"></i>Inicio</a>
+
+		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('main.instructions') else '' }}" >Instrucciones</a>
+
 		{% if current_user.is_anonymous %}
-		<a href="{{ url_for('auth.register') }}" class="btn btn-info btn-lg" >Registrarse</a>
-		<a href="{{ url_for('auth.login') }}" class="btn btn-info btn-lg" >Iniciar Sesión</a>
+		<a href="{{ url_for('auth.register') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('auth.register') else '' }}" >Registrarse</a>
+
+		<a href="{{ url_for('auth.login') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('auth.login') else '' }}" >Iniciar Sesión</a>
 		{% else %}
-		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg">Cerrar Sesión</a>
+		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('auth.logout') else '' }}">Cerrar Sesión</a>
 		{% endif %}
 	</nav>
 {% endblock %}
