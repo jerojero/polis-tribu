@@ -28,7 +28,9 @@
 
 .footer-div {
   margin-top: 5em;
-  margin-bottom: 2em;
+  position: relative;
+  bottom: 2em;
+  /*margin-bottom: -2em;*/
 }
 
 .footer-div img {
