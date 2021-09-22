@@ -2,14 +2,19 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+<div class="text-center">
 	<h1>Inicia sesión</h1>
+</div>
 	 <div class="row">
- 		<div class="col-md-4">
+ 		<div class="col-md-offset-4 col-md-4">
  			{{ wtf.quick_form(form) }}
  		</div>
  	</div>
  	<br>
-	<p>
+ 	<p class="col-md-offset-4 col-md-4">
+		No tienes usuario? <a href="{{ url_for('auth.register') }}">Registrate acá</a>.
+	</p>
+	<p class="col-md-offset-4 col-md-6">
 		Te olvidaste de tu contraseña?
 		<a href="{{ url_for('auth.reset_password_request') }}">Apreta acá para restaurarla</a>
 	</p>

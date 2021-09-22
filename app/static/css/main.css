@@ -41,12 +41,12 @@
 .footer-div a .fa{
   font-size: 2em;
   color: black;
-  margin: 0 0.5em 0.5em 0;
-  transition: 0.3s;
+  margin: 0 0.3em 0.3em 0;
+  transition: 0.2s;
 }
 
 .footer-div a .fa:hover {
-  color: #6c9ae6;
+  color: #5063d9;
 }
 
 .footer-div span {
@@ -73,17 +73,6 @@ h1::after {
   margin: 0 auto;
 }
 
-/*@supports (background-clip: text) {
-  h1::after {
-
-    background-image: linear-gradient(45deg, #6c9ae6, #665dd5);
-    background-size: 500%;
-    background-clip: text;
-    color: transparent;
-    animation: bg-animation 20s infinite alternate;
-  }
-}*/
-
 h2 {
   text-transform: uppercase;
 }
@@ -98,19 +87,54 @@ h2 {
   margin: 0.5em;
 }
 
+.btn-info {
+  transition: 0.2s;
+  border-radius: none;
+  border-color: black;
+  background: #fff;
+  color: black;
+  box-shadow: 1rem 1rem black;
+}
+
+.btn-info:active:focus {
+  background: #5063d9;
+  color: white;
+  border-color: #5063d9;
+  box-shadow: none
+}
+
+.btn:hover {
+  background: #5063d9;
+  color: white;
+  border-color: #5063d9;
+}
+
+.navbar .btn-info:hover {
+  background: #5063d9;
+  color: white;
+}
+
+.navbar .btn-info {
+  font-weight: 900;
+}
+
+.navbar .active {
+  background: #5063d9;
+}
+
+
 mark {
   background-color: #b4cffb;
 }
 
-.btn-info {
-  background: #665dd5;
-  border-radius: none;
+html {
+  background-color: #b4cffb;
 }
 
 body {
-  background-image: linear-gradient(45deg, #6c9ae6, #665dd5);
-  background-size: 2200% 2200%;
-  animation: bg-animation 20s infinite alternate;
+  background-image: linear-gradient(45deg, #b4cffb, #5063d9);
+  background-size: 800% 800%;
+  animation: bg-animation 30s infinite alternate;
 }
 
 @keyframes bg-animation {

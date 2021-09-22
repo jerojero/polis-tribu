@@ -1,13 +1,10 @@
 {% extends 'bootstrap/base.html' %}
 
-{% block head %}
-	{{ super() }}
-	<script src="https://use.fontawesome.com/e9d9405e58.js" crossorigin="anonymous"></script>
-{% endblock %}
-
 {% block styles %}
 	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css">
 {% endblock %}
 
 
@@ -36,6 +33,10 @@
 		{{ 'active' if request.path == url_for('auth.login') else '' }}" >
 		<i class="fa fa-user-circle"></i> Iniciar Sesión</a>
 		{% else %}
+		<a href="{{ url_for('main.polis') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('main.polis') else '' }}" >
+		<i class="fa fa-person-booth"></i> <span class="disappear">Polis</span></a>
+
 		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg
 		{{ 'active' if request.path == url_for('auth.logout') else '' }}">
 		<i class="fa fa-user-times"></i> <span class="disappear">Cerrar Sesión</span></a>
