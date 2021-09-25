@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-	<div class='polis' data-conversation_id='3hmuxjyjzx' data-xid='{{ current_user.lxs400_vc }}'></div>
-	<script async src='https://pol.is/embed.js'></script>
+	{% if current_user.doctor %}
+		<div class='polis' data-conversation_id='6vudnxnmf5' data-xid='{{ current_user.lxs400_vc }}'></div>
+		<script async src='https://pol.is/embed.js'></script>
+	{% else %}
+		<div class='polis' data-conversation_id='3hmuxjyjzx' data-xid='{{ current_user.lxs400_vc }}'></div>
+		<script async src='https://pol.is/embed.js'></script>
+	{% endif %}
 {% endblock %}

@@ -17,6 +17,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        if user is None:
+            user = User.query.filter_by(email=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or passowrd')
             return redirect(url_for('auth.login'))
@@ -72,9 +74,15 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        doctor = True if len(form.verification_code.data) == 7 else False
         lxs400 = Lxs400.query.filter_by(
             verification_code=form.verification_code.data).first()
-        user = User(username=form.username.data, email=form.email.data,
+        user = User(username=form.username.data,
+                    name=form.name.data,
+                    last_name=form.last_name.data,
+                    rut=form.rut.data,
+                    email=form.email.data,
+                    doctor=doctor,
                     lxs400=lxs400)
         user.set_password(form.password.data)
         db.session.add(user)
