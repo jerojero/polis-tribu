@@ -131,6 +131,7 @@ dmypy.json
 
 # MacOS Stuff
 *.DS_Store
+*.db
 
 # Website stuff
 logs/
