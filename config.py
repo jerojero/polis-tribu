@@ -13,7 +13,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Internationalization
-    LANGUGAGES = ['en', 'es']
+    LANGUAGES = ['en', 'es']
 
     # Email Configuration
     MAIL_SERVER = os.environ.get("MAIL_SERVER")
