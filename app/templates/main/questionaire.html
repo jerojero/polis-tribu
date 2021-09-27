@@ -7,7 +7,11 @@
 	</div>
 	{% else %}
 		<div class="google-form-container">
+		{% if not has_visited %}
+			<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSf6rhatfHWb3OYbYu0TdZ_170cynvmGGCHsw2L3t_TU1pAD5g/viewform?embedded=true&entry.23650337={{ current_user.email }}&entry.1618171596={{ current_user.name }}&entry.1832470914={{ current_user.rut }}">Loading…</iframe>
+		{% else %}
 			<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSf6rhatfHWb3OYbYu0TdZ_170cynvmGGCHsw2L3t_TU1pAD5g/viewform?embedded=true">Loading…</iframe>
+		{% endif %}
 		</div>
 	{% endif %}
 {% endblock %}

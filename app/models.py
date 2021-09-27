@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     doctor = db.Column(db.Boolean)
+    has_visited = db.Column(db.Boolean)
     lxs400_vc = db.Column(db.String(64),
                           db.ForeignKey('lxs400.verification_code'))
 
