@@ -5,6 +5,17 @@ body {
 .video-container {
   position: relative;
   overflow: hidden;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  padding-top: 39.37%;  /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) 
+  /*padding-top: 56.25%;*/
+}
+
+.google-form-container {
+  position: relative;
+  overflow: hidden;
   margin-left: 0%;
   width: 100%;
   /*padding-top: 39.37%;  16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
@@ -159,5 +170,14 @@ body {
 
   .sm-query h1 {
     font-size: 2.5rem;
+  }
+
+  .google-form-container {
+      height: 100vh;
+  }
+
+  .video-container {
+      width: 100%;
+      padding-top: 56.25%;
   }
 }

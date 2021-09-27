@@ -10,10 +10,10 @@ def index():
     return render_template('main/index.html')
 
 
-@bp.route('/polis/')
+@bp.route('/questionaire/')
 @login_required
-def polis():
-    return render_template('main/polis.html')
+def questionaire():
+    return render_template('main/questionaire.html')
 
 
 @bp.route('/instructions/')
