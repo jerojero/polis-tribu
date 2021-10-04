@@ -32,6 +32,8 @@ class RegistrationForm(MyBaseForm, FlaskForm):
         'Repetir contraseña', validators=[DataRequired(), EqualTo('password')])
     verification_code = StringField('Codigo de verificación',
                                     validators=[DataRequired()])
+    consent_bool = BooleanField(
+        "Aceptas los terminos y condiciones?", validators=[DataRequired()])
     submit = SubmitField('Registrarse')
 
     def validate_username(self, username):
