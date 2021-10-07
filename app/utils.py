@@ -27,5 +27,5 @@ def export_codes():
         names.append(user.name)
         emails.append(user.email)
         vfs.append(user.verification_code)
-    d = {'nombre:'names, 'email:'emails, 'codigo:'vfs}
+    d = {'nombre': names, 'email': emails, 'codigo': vfs}
     pd.DataFrame(data=d).to_csv(r'codigos.csv', index=False)
