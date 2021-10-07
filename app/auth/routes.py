@@ -70,6 +70,8 @@ def reset_password(token):
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
+    def norm_names(word):
+        return ' '.join(elem.capitalize() for elem in word.split())
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = RegistrationForm()
@@ -78,9 +80,12 @@ def register():
         lxs400 = Lxs400.query.filter_by(
             verification_code=form.verification_code.data).first()
         user = User(username=form.username.data,
-                    name=form.name.data,
-                    last_name=form.last_name.data,
+                    name=norm_names(form.name.data),
+                    last_name=norm_names(form.last_name.data),
+                    age=form.age.data,
                     rut=form.rut.data,
+                    gender=form.gender.data,
+                    phone=form.phone.data,
                     email=form.email.data,
                     doctor=doctor,
                     lxs400=lxs400)

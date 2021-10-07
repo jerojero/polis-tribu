@@ -8,9 +8,9 @@
 	{% else %}
 		<div class="google-form-container">
 		{% if not has_visited %}
-			<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSf6rhatfHWb3OYbYu0TdZ_170cynvmGGCHsw2L3t_TU1pAD5g/viewform?embedded=true&entry.23650337={{ current_user.email }}&entry.1618171596={{ current_user.name }}&entry.1832470914={{ current_user.rut }}">Loading…</iframe>
+			<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSewjpB2efRuUKWeDb4zbIpHMZjnt45NdpZeBt1JjHXu41poJw/viewform?usp=pp_url&entry.1992635449={{ current_user.name + ' ' + current_user.last_name }}&entry.164868={{ current_user.phone }}&entry.1458945363={{ current_user.email }}&entry.434043300={{ current_user.age }}&entry.132029952={{ current_user.gender }}">Loading…</iframe>
 		{% else %}
-			<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSf6rhatfHWb3OYbYu0TdZ_170cynvmGGCHsw2L3t_TU1pAD5g/viewform?embedded=true">Loading…</iframe>
+			<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSewjpB2efRuUKWeDb4zbIpHMZjnt45NdpZeBt1JjHXu41poJw/viewform?embedded=true">Loading…</iframe>
 		{% endif %}
 		</div>
 	{% endif %}

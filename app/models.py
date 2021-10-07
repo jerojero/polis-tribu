@@ -19,6 +19,10 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     name = db.Column(db.String(64))
     last_name = db.Column(db.String(64))
+    age = db.Column(db.Integer)
+    gender = db.Column(db.String(64))
+    phone = db.Column(db.Integer)
+    consent = db.Column(db.Boolean)
     rut = db.Column(db.String(64))
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
@@ -48,7 +52,7 @@ class User(UserMixin, db.Model):
         return User.query.get(id)
 
     def __repr__(self):
-        return f"<User {self.username}>"
+        return f"<User {self.username}, {self.email}, {self.lxs400_vc}>"
 
 
 class Lxs400(db.Model):
@@ -60,6 +64,8 @@ class Lxs400(db.Model):
                            uselist=False, cascade="all")
 
     def set_verification_code(self, attempts=0):
+        if self.verification_code:
+            return
         verification_code = ''.join([random.choice(
             string.ascii_letters + string.digits) for _ in range(6)])
         if attempts > 10:

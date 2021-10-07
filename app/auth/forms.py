@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField
+from wtforms import IntegerField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-
 from app.models import User, Lxs400
 
 
@@ -23,10 +23,16 @@ class RegistrationForm(MyBaseForm, FlaskForm):
     name = StringField('Nombre', validators=[DataRequired()])
     last_name = StringField('Apellido', validators=[DataRequired()])
     rut = StringField('Rut, sin puntos ni guión', validators=[DataRequired()])
+    age = IntegerField('Edad', validators=[DataRequired()])
+    gender = SelectField('Género', choices=[('mujer', 'Mujer'),
+                                            ('hombre', 'Hombre'),
+                                            ('otro', 'Otro')],
+                         validators=[DataRequired()])
     email = StringField('Correo electrónico', validators=[DataRequired(),
                                                           Email()])
     email2 = StringField('Repetir correo electrónico', validators=[
-                         DataRequired(), EqualTo('email')])
+        DataRequired(), EqualTo('email')])
+    phone = StringField('Numero de teléfono', validators=[DataRequired()])
     password = PasswordField('Contraseña', validators=[DataRequired()])
     password2 = PasswordField(
         'Repetir contraseña', validators=[DataRequired(), EqualTo('password')])
@@ -42,6 +48,9 @@ class RegistrationForm(MyBaseForm, FlaskForm):
             raise ValidationError('Este nombre de usuario ya está registrado.'
                                   ' Porfavor elegir otro'
                                   ' nombre de usuario')
+        if not username.data.isalnum():
+            raise ValidationError('Solo letras y números para '
+                                  'el nombre de usuario.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
@@ -71,6 +80,13 @@ class RegistrationForm(MyBaseForm, FlaskForm):
             raise ValidationError("Alguien ya está usando este código de "
                                   "verificación. Porfavor contacte al "
                                   "administrador.")
+
+    def validate_phone(self, phone):
+        phone_n = phone.data
+        if not ((phone_n[0] == '+' or phone_n[0].isdigit()) and
+                phone_n[1:].isdigit()):
+            raise ValidationError('Número de teléfono no es '
+                                  'válido.')
 
 
 class ResetPasswordRequestForm(FlaskForm):

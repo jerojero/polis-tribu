@@ -19,7 +19,16 @@
                     {{ wtf.form_field(form.last_name)}}
                 </p>
                 <p>
+                    {{ wtf.form_field(form.age) }}
+                </p>
+                <p>
                     {{ wtf.form_field(form.rut) }}
+                </p>
+                <p>
+                    {{ wtf.form_field(form.gender) }}
+                </p>
+                <p>
+                    {{ wtf.form_field(form.phone) }}
                 </p>
                 <p>
                     {{ wtf.form_field(form.email) }}
@@ -37,7 +46,7 @@
                     {{ wtf.form_field(form.verification_code) }}
                 </p>
                 <p>
-                    <a href="{{ url_for('main.index')}}">Lee los términos y condiciones aquí</a>
+                    <a href="{{ url_for('main.terms_and_conditions')}}">Lee los términos y condiciones aquí</a>
                     {{ wtf.form_field(form.consent_bool) }}
                 </p>
                 <p>

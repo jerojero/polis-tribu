@@ -1,8 +1,8 @@
-"""empty message
+"""All user fields
 
-Revision ID: e52d9ca2208c
-Revises: 9d5ecba279f0
-Create Date: 2021-09-25 21:20:01.936254
+Revision ID: 49ee75e3abee
+Revises: 
+Create Date: 2021-10-07 21:22:27.019856
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e52d9ca2208c'
-down_revision = '9d5ecba279f0'
+revision = '49ee75e3abee'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -29,8 +29,17 @@ def upgrade():
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=64), nullable=True),
+    sa.Column('name', sa.String(length=64), nullable=True),
+    sa.Column('last_name', sa.String(length=64), nullable=True),
+    sa.Column('age', sa.Integer(), nullable=True),
+    sa.Column('gender', sa.String(length=64), nullable=True),
+    sa.Column('phone', sa.Integer(), nullable=True),
+    sa.Column('consent', sa.Boolean(), nullable=True),
+    sa.Column('rut', sa.String(length=64), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
+    sa.Column('doctor', sa.Boolean(), nullable=True),
+    sa.Column('has_visited', sa.Boolean(), nullable=True),
     sa.Column('lxs400_vc', sa.String(length=64), nullable=True),
     sa.ForeignKeyConstraint(['lxs400_vc'], ['lxs400.verification_code'], ),
     sa.PrimaryKeyConstraint('id')
