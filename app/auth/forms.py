@@ -20,8 +20,8 @@ class LoginForm(MyBaseForm):
 
 class RegistrationForm(MyBaseForm, FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])
-    name = StringField('Nombre', validators=[DataRequired()])
-    last_name = StringField('Apellido', validators=[DataRequired()])
+    name = StringField('Nombre(s)', validators=[DataRequired()])
+    last_name = StringField('Apellido(s)', validators=[DataRequired()])
     rut = StringField('Rut, sin puntos ni guión', validators=[DataRequired()])
     age = IntegerField('Edad', validators=[DataRequired()])
     gender = SelectField('Género', choices=[('mujer', 'Mujer'),
