@@ -25,7 +25,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('main.questionaire')
+            next_page = url_for('forms.questionaire')
         return redirect(next_page)
     return render_template('auth/login.html', title='Sign In', form=form)
 
@@ -82,9 +82,9 @@ def register():
         user = User(username=form.username.data,
                     name=norm_names(form.name.data),
                     last_name=norm_names(form.last_name.data),
-                    age=form.age.data,
-                    rut=form.rut.data,
-                    gender=form.gender.data,
+                    #age=form.age.data,
+                    #rut=form.rut.data,
+                    #gender=form.gender.data,
                     phone=form.phone.data,
                     email=form.email.data,
                     doctor=doctor,

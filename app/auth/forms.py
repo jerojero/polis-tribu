@@ -19,27 +19,36 @@ class LoginForm(MyBaseForm):
 
 
 class RegistrationForm(MyBaseForm, FlaskForm):
-    username = StringField('Nombre de usuario', validators=[DataRequired()])
-    name = StringField('Nombre(s)', validators=[DataRequired()])
-    last_name = StringField('Apellido(s)', validators=[DataRequired()])
-    rut = StringField('Rut, sin puntos ni guión', validators=[DataRequired()])
-    age = IntegerField('Edad', validators=[DataRequired()])
-    gender = SelectField('Género', choices=[('mujer', 'Mujer'),
-                                            ('hombre', 'Hombre'),
-                                            ('otro', 'Otro')],
-                         validators=[DataRequired()])
-    email = StringField('Correo electrónico', validators=[DataRequired(),
-                                                          Email()])
-    email2 = StringField('Repetir correo electrónico', validators=[
-        DataRequired(), EqualTo('email')])
-    phone = StringField('Numero de teléfono', validators=[DataRequired()])
-    password = PasswordField('Contraseña', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Repetir contraseña', validators=[DataRequired(), EqualTo('password')])
-    verification_code = StringField('Codigo de verificación',
+    username = StringField('Nombre de usuario (*)',
+                           validators=[DataRequired()])
+    name = StringField('Nombre(s) (*)',
+                       validators=[DataRequired()],
+                       description="Ej: Juan Ignacio")
+    last_name = StringField('Apellido(s) (*)',
+                            validators=[DataRequired()],
+                            description="Ej: Pérez Paredes")
+    #rut = StringField('Rut, sin puntos ni guión', validators=[DataRequired()])
+    #age = IntegerField('Edad', validators=[DataRequired()])
+    # gender = SelectField('Género', choices=[('mujer', 'Mujer'),
+    #                                        ('hombre', 'Hombre'),
+    #                                        ('otro', 'Otro')],
+    #                     validators=[DataRequired()])
+    email = StringField('Correo electrónico (*)',
+                        validators=[DataRequired(), Email()],
+                        description="Ej: alex@ejemplo.com")
+    email2 = StringField('Repetir correo electrónico (*)',
+                         validators=[DataRequired(), EqualTo('email')])
+    phone = StringField('Numero de teléfono (*)',
+                        validators=[DataRequired()],
+                        description="Ej: +56936201943")
+    password = PasswordField('Contraseña (*)',
+                             validators=[DataRequired()])
+    password2 = PasswordField('Repetir contraseña (*)',
+                              validators=[DataRequired(), EqualTo('password')])
+    verification_code = StringField('Codigo de verificación (*)',
                                     validators=[DataRequired()])
-    consent_bool = BooleanField(
-        "Aceptas los terminos y condiciones?", validators=[DataRequired()])
+    consent_bool = BooleanField("Aceptas los terminos y condiciones?",
+                                validators=[DataRequired()])
     submit = SubmitField('Registrarse')
 
     def validate_username(self, username):

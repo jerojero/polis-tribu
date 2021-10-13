@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+	{% if current_user.doctor %}
+	<div class="google-form-container">
+		<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdR7N6gKdWzHEnpZgv-iPCQf18xqCI2b-RY2LR40PGjuCj1TA/viewform?embedded=true">Loading…</iframe>
+	</div>
+	{% else %}
+	<div class="text-center">
+		{% for question in section.questions.all() %}
+			{% if question.question_type == "header" %}
+				<h1>{{ question.title }}</h1>
+				<p>{{ question.description }}</p>
+			{% endif %}
+		{% endfor %}
+		
+		<form class="form form-horizontal" method="post" role="form" novalidate>
+		{{ form.hidden_tag() }}
+		{% for field in form if field.widget.input_type != 'hidden' %}
+			{% if field.type != "SubmitField" %}
+  				{{ field.label }}
+  				{{ field(size=32 )}}
+  			{% endif %}
+		{% endfor %}
+		{{ form.submit(class="btn btn-default") }}
+		</form>
+
+    </div>
+	{% endif %}
+{% endblock %}

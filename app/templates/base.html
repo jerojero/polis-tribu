@@ -33,8 +33,8 @@
 		{{ 'active' if request.path == url_for('auth.login') else '' }}" >
 		<i class="fa fa-user-circle"></i> Iniciar Sesión</a>
 		{% else %}
-		<a href="{{ url_for('main.questionaire') }}" class="btn btn-info btn-lg
-		{{ 'active' if request.path == url_for('main.questionaire') else '' }}" >
+		<a href="{{ url_for('forms.questionaire') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('forms.questionaire') else '' }}" >
 		<i class="fa fa-person-booth"></i> <span class="disappear">Cuestionario</span></a>
 
 		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg

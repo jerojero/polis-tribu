@@ -14,6 +14,13 @@ from time import time
 import jwt
 
 
+user_answer = db.Table('user_answer',
+                       db.Column('user_id', db.Integer,
+                                 db.ForeignKey('user.id')),
+                       db.Column('answer_id', db.Integer,
+                                 db.ForeignKey('answer.id')))
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -28,8 +35,11 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     doctor = db.Column(db.Boolean)
     has_visited = db.Column(db.Boolean)
+    last_question = db.Column(db.Integer)
     lxs400_vc = db.Column(db.String(64),
                           db.ForeignKey('lxs400.verification_code'))
+    answers = db.relationship("Answer", secondary=user_answer,
+                              backref=db.backref('answerer'))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -81,6 +91,56 @@ class Lxs400(db.Model):
     def __repr__(self):
         return f"<User ID: {self.id}, Name: {self.name}, " \
                f"VF: {self.verification_code}>"
+
+
+class Question(db.Model):
+    __tablename__ = 'question'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text)
+    description = db.Column(db.Text)
+    question_type = db.Column(db.String(64))
+    answer_options = db.Column(db.Text)
+    head = db.Column(db.Boolean)
+    previous_question = db.Column(db.Integer)
+    next_question = db.Column(db.Integer)
+    section_id = db.Column(db.Integer, db.ForeignKey('section.id'))
+    answer = db.relationship("Answer", backref="question", lazy="dynamic")
+
+    def get_next_question(self, answer_id=None):
+        if not answer_id:
+            return self.next_question
+        a = self.answer.filter_by(id=answer_id).first()
+        if a:
+            return a.next_question
+        else:
+            return self.next_question
+
+    def set_next_question(self, next_q, answer_id=None):
+        if not answer_id:
+            self.next_question = next_q
+        else:
+            Answer.query.get(answer_id).next_question = next_q
+
+    def __repr__(self):
+        return f"<ID: {self.id}, type: {self.question_type}, title: {self.title}>\n"
+
+
+class Answer(db.Model):
+    __tablename__ = 'answer'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text)
+    next_question = db.Column(db.Integer)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+
+    def __repr__(self):
+        return f"<ID: {self.id} text: {self.text}" \
+            f" question: {self.question_id}>\n"
+
+
+class Section(db.Model):
+    __tablename__ = 'section'
+    id = db.Column(db.Integer, primary_key=True)
+    questions = db.relationship("Question", backref="section", lazy="dynamic")
 
 
 @login.user_loader

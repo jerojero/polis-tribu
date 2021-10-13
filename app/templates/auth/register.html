@@ -10,6 +10,9 @@
             <form class="form form-horizontal" method="post" role="form" novalidate>
                 {{ form.hidden_tag() }}
                 <p>
+                    Espacios requeridos marcados con asterisco (*)
+                </p>
+                <p>
                     {{ wtf.form_field(form.username)}}
                 </p>
                 <p>
@@ -18,7 +21,7 @@
                 <p>
                     {{ wtf.form_field(form.last_name)}}
                 </p>
-                <p>
+{#                 <p>
                     {{ wtf.form_field(form.age) }}
                 </p>
                 <p>
@@ -26,7 +29,7 @@
                 </p>
                 <p>
                     {{ wtf.form_field(form.gender) }}
-                </p>
+                </p> #}
                 <p>
                     {{ wtf.form_field(form.phone) }}
                 </p>

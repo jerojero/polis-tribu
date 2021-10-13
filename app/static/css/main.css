@@ -96,7 +96,26 @@ h1::after {
 }
 
 h2 {
-  text-transform: uppercase;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 1em;
+    display: inline-block;
+    position: relative;
+}
+
+h2::after {
+  content: '';
+  border-bottom: 0.3em solid #000;
+  width: 100%;
+  display: block;
+  position: absolute;
+  margin: 0 auto;
+}
+
+.question-description {
+  margin: 1em;
+  margin-bottom: 2em;
 }
 
 .navbar {
