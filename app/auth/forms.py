@@ -27,12 +27,6 @@ class RegistrationForm(MyBaseForm, FlaskForm):
     last_name = StringField('Apellido(s) (*)',
                             validators=[DataRequired()],
                             description="Ej: Pérez Paredes")
-    #rut = StringField('Rut, sin puntos ni guión', validators=[DataRequired()])
-    #age = IntegerField('Edad', validators=[DataRequired()])
-    # gender = SelectField('Género', choices=[('mujer', 'Mujer'),
-    #                                        ('hombre', 'Hombre'),
-    #                                        ('otro', 'Otro')],
-    #                     validators=[DataRequired()])
     email = StringField('Correo electrónico (*)',
                         validators=[DataRequired(), Email()],
                         description="Ej: alex@ejemplo.com")

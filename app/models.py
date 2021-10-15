@@ -13,12 +13,19 @@ import string
 from time import time
 import jwt
 
+# Form stuff
+from wtforms import RadioField
+from wtforms.validators import Optional, DataRequired
 
-user_answer = db.Table('user_answer',
-                       db.Column('user_id', db.Integer,
-                                 db.ForeignKey('user.id')),
-                       db.Column('answer_id', db.Integer,
-                                 db.ForeignKey('answer.id')))
+
+class Results(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    answers = db.Column(db.Text)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return f"<ID: {self.id}, User: {self.user_id}, Question: {self.question_id}, Answer: {self.answers}>\n"
 
 
 class User(UserMixin, db.Model):
@@ -38,8 +45,8 @@ class User(UserMixin, db.Model):
     last_question = db.Column(db.Integer)
     lxs400_vc = db.Column(db.String(64),
                           db.ForeignKey('lxs400.verification_code'))
-    answers = db.relationship("Answer", secondary=user_answer,
-                              backref=db.backref('answerer'))
+    result = db.relationship('Results', backref='user',
+                             uselist=False, cascade="all")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -101,10 +108,14 @@ class Question(db.Model):
     question_type = db.Column(db.String(64))
     answer_options = db.Column(db.Text)
     head = db.Column(db.Boolean)
+    tail = db.Column(db.Boolean)
     previous_question = db.Column(db.Integer)
     next_question = db.Column(db.Integer)
     section_id = db.Column(db.Integer, db.ForeignKey('section.id'))
+    optional = db.Column(db.Boolean)
     answer = db.relationship("Answer", backref="question", lazy="dynamic")
+    result = db.relationship('Results', backref='question',
+                             uselist=False, cascade="all")
 
     def get_next_question(self, answer_id=None):
         if not answer_id:
@@ -122,7 +133,7 @@ class Question(db.Model):
             Answer.query.get(answer_id).next_question = next_q
 
     def __repr__(self):
-        return f"<ID: {self.id}, type: {self.question_type}, title: {self.title}>\n"
+        return f"<ID: {self.id}, type: {self.question_type}, title: {self.title} >\n"
 
 
 class Answer(db.Model):
@@ -133,16 +144,17 @@ class Answer(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
 
     def __repr__(self):
-        return f"<ID: {self.id} text: {self.text}" \
-            f" question: {self.question_id}>\n"
+        return f"<ID: {self.id} text: {self.text}, question: {self.question_id}>\n"
 
 
 class Section(db.Model):
     __tablename__ = 'section'
     id = db.Column(db.Integer, primary_key=True)
-    questions = db.relationship("Question", backref="section", lazy="dynamic")
+    tail = db.Column(db.Boolean)
+    questions = db.relationship(
+        "Question", backref="section", lazy="dynamic")
 
 
-@login.user_loader
+@ login.user_loader
 def load_user(id):
     return User.query.get(int(id))

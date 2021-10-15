@@ -9,7 +9,7 @@
 	{% else %}
 	<div class="text-center">
 		{% for question in section.questions.all() %}
-			{% if question.question_type == "header" %}
+			{% if question.question_type == "hd" %}
 				<h1>{{ question.title }}</h1>
 				<p>{{ question.description }}</p>
 			{% endif %}
@@ -19,11 +19,18 @@
 		{{ form.hidden_tag() }}
 		{% for field in form if field.widget.input_type != 'hidden' %}
 			{% if field.type != "SubmitField" %}
-  				{{ field.label }}
-  				{{ field(size=32 )}}
+				<br>
+  				{{ field.label }}<br>
+  				{{ field(size=32 )}}<br>
   			{% endif %}
 		{% endfor %}
-		{{ form.submit(class="btn btn-default") }}
+		{% if section.id > 1%}
+			{% set prev_section = section.id - 1%}
+			<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
+		{% endif %}
+		{% if not section.tail %}
+			{{ form.next(class="btn btn-default") }}
+		{% endif %}
 		</form>
 
     </div>

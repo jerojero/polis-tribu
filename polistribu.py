@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import User, Lxs400, Question, Answer, Section
+from app.models import User, Lxs400, Question, Answer, Section, Results
 
 
 app = create_app()
@@ -12,4 +12,5 @@ def make_shell_context():
             'Lxs400': Lxs400,
             'Question': Question,
             'Answer': Answer,
-            'Section': Section}
+            'Section': Section,
+            'Results': Results}

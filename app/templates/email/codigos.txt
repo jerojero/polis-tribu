@@ -1,0 +1,8 @@
+Hola {{ name }},
+
+Se le invita a la encuesta, este es su codigo:
+
+{{ verification_code }}
+
+Gracias,
+Equipo.
