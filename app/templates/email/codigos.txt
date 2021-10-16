@@ -1,8 +1,32 @@
-Hola {{ name }},
+Hola {{ name }}!
 
-Se le invita a la encuesta, este es su codigo:
+Junto con saludarte quisiéramos agradecerte nuevamente por su participación en el proceso deliberativo de Lxs 400. La participación de cada uno de Lxs 400 fue tremendamente importante para el éxito de dicho proyecto.
 
-{{ verification_code }}
+Estamos cerca de la elección presidencial, la cual ha sido antecedida por una profunda crisis política, social, así como también sanitaria que dio cuenta de la necesidad de realizar reformas importantes a nuestro sistema de salud, reformas que deben recoger los intereses, opiniones, preferencias, necesidades y distintas perspectivas de la ciudadanía.
 
-Gracias,
-Equipo.
+Por esta razón te invitamos a participar en esta consulta y proceso deliberativo, el cual permitirá identificar y/o profundizar diferentes alternativas que sean consideradas más deseables para la ciudadanía y así desde esas conclusiones poder elaborar un programa de reformas en salud que no solo refleje lo técnico, sino que también las necesidades y consideraciones de la ciudadanía.
+
+
+¿Cómo funcionará esta consulta?
+
+
+1.	Con este link y código único podrás registrarte de manera fácil y rápida en nuestra plataforma para así contestar la encuesta que tomará aproximadamente 25 minutos. 
+
+https://www.chilexchile.cl/
+
+Código de registro: {{ verification_code }}
+
+Por el solo hecho de contestar la encuesta habrá una compensación de $8.000, la transferencia se realizará el día 01 de Noviembre de 2021. Para esto, te preguntaremos al final del formulario tus preferencias y datos para hacer la transferencia.
+
+
+2.	A continuación, entre quienes contestaron la encuesta se realizará una selección vía sorteo, donde se les invitará participar en un proceso deliberativo el día xx a las xx hrs. Esta etapa concluye con una encuesta de cierre.
+Las personas que participen en esta etapa de la consulta recibirán una compensación de $15.000 a través de transferencia bancaria luego de haber completado y enviado la encuesta de cierre, el día xx Noviembre, 2021.
+
+
+
+Si tienes preguntas o inquietudes, por favor no dudes en contactarnos al email info@tribru.org o al whatsapp +56 9 73103575
+
+Saludos cordiales,
+
+Fundacion Tribu
+

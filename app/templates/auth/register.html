@@ -9,9 +9,19 @@
  		<div class="col-md-offset-4 col-md-4">
             <form class="form form-horizontal" method="post" role="form" novalidate>
                 {{ form.hidden_tag() }}
+
+
+                <p>Antes de registrarte es necesario que leas los términos y condiciones de uso de la página.</p>
+                <p>
+                    <a href="{{ url_for('main.terms_and_conditions')}}">Lee los términos y condiciones aquí</a>
+                    {{ wtf.form_field(form.consent_bool) }}
+                </p>
+
+                <br><br>
                 <p>
                     Espacios requeridos marcados con asterisco (*)
                 </p>
+
                 <p>
                     {{ wtf.form_field(form.username)}}
                 </p>
@@ -48,10 +58,9 @@
                 <p>
                     {{ wtf.form_field(form.verification_code) }}
                 </p>
-                <p>
-                    <a href="{{ url_for('main.terms_and_conditions')}}">Lee los términos y condiciones aquí</a>
-                    {{ wtf.form_field(form.consent_bool) }}
-                </p>
+
+                <br>
+
                 <p>
                     {{ form.submit(class="btn btn-default") }}
                 </p>

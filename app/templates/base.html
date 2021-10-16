@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css">
 {% endblock %}
 
+{% block scripts %}
+	<script>
+		function outputUpdate(inp, elementID) {
+			document.querySelector('#'+elementID).value = inp;
+		}		
+	</script>
+{% endblock %}
 
 
 {% block title %}

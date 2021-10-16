@@ -2,38 +2,41 @@
 
 {% block app_content %}
 
-<h1>
-	Términos y condiciones de uso<br>
-</h1>
-<br>
-<br>
-<p><span class="disappear">Lorem</span> ipsum dolor sit amet, <mark>texto muy importante</mark> elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum <mark>otro texto importante</mark> pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<br>
-<blockquote>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-		<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-</blockquote>
-<br>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, temporibus. Distinctio, blanditiis, ipsam. Voluptatum soluta magni, omnis natus quaerat, officiis earum. Ipsa rerum, nostrum esse eligendi possimus nisi <mark>ultimo texto importante?</mark></p>
+<div class="text-center">
+	<h1>CONSENTIMIENTO INFORMADO</h1>
+</div>
 
-<br>
-<br>
-{% if current_user.is_anonymous %}
+<p><b>Usted ha sido invitado(a) a participar en el “Consulta y deliberación sobre reformas al sistema de salud”</b>, una iniciativa de participación ciudadana que tiene como objetivo reunir chilenas y chilenos representantes de la diversidad de personas que habitan el país, para deliberar sobre temas significativos para nuestra sociedad: reforma al y sistema de salud.  Este proyecto está impulsado por la Colegio Médico de Chile A.G. y Fundación Tribu.</p> 
+
+<p><b>" Consulta y deliberación sobre reformas al sistema de salud "</b> está basado en un modelo desarrollado por el profesor James Fishkin del Centro de Democracia Deliberativa de la Universidad de Stanford. Dicha metodología fue diseñada de manera científica y permite a la ciudadanía articular y expresar opiniones, considerando un proceso de información entregada por expertos y libre de sesgos.</p>
+
+<p><b>¿Cuál es el propósito de esta investigación?</b>
+“Consulta y deliberación sobre reformas al sistema de salud” busca abrir espacios de diálogo para debatir en torno al sistema de sistema de salud. Esta iniciativa fomenta la participación ciudadana de cara al proceso constituyente y el trabajo legislativo futuro.</p>
+
+<p><b>¿Cómo se eligieron a los participantes?</b>
+Se invitaron a participar a las 514 personas que participaron en los “Lxs 400s Chile Delibera”. Los cuales se seleccionaron por medio de un proceso donde se eligieron 30.000 viviendas al azar en todo Chile. Los residentes de estas viviendas recibieron una carta con la invitación a participar. Entre quienes respondieron a la carta y se les invito a participar en la deliberación.</p>
+
+<p><b>¿En qué consiste su participación?</b>
+Quienes participen en "Consulta y deliberación sobre reformas al sistema de salud " deben responder una encuesta antes del encuentro participativo, luego se seleccionan 45 personas de forma aleatoria que asistirán a las jornadas deliberativas que se realizarán en modalidad virtual en una plataforma desarrollada por la Universidad de Stanford. Al finalizar, los participantes contestarán una nueva encuesta.</p>
+
+<p><b>¿Qué información personal debo aportar al estudio? </b>
+Ud. aportara con las respuestas al cuestionario del estudio que se realizara, además, de su nombre, profesión, nivel de educación, lugar de residencia y género.</p>
+
+<p><b>¿Qué beneficios tiene su participación?</b>
+Con las opiniones de los participantes se va a generar un informe que será entregado al Colegio Médico A.G., quienes podrían utilizarlo como insumo en su para entender las prioridades y preferencias de los chilenos y chilenas. Toda publicación producida en esta investigación solo se realizará con información anónima y estadística. Le aseguramos que hemos eliminado o reducido al mínimo los riesgos de reidentificación de las personas participantes en el estudio.</p>
+
+<p><b>¿Qué pasa con la confidencialidad de la información que usted entregue?</b>
+Toda la información obtenida a través de este estudio será́ estrictamente confidencial y estará resguardada bajo el secreto estadístico contenido en la Ley 17.374 y de conformidad a la Ley 19.628 sobre protección a la vida privada. La información será utilizada de manera innominada en forma agregada y bajo un estricto protocolo de confidencialidad. Este estudio tiene una duración de 5 meses.</p>
+
+<p><b>¿Es obligación participar?</b>
+Su participación es completamente voluntaria, por lo que usted no está obligado/a a participar en este estudio. Si decide hacerlo, podrá́ retirarse del estudio sin ninguna penalidad o consecuencia de ningún tipo en cualquier momento. Si se retira del estudio, los datos aportados hasta el momento de su participación podrán seguir siendo utilizados para cumplir las finalidades del estudio.</p>
+
+<p><b>Identificación de los investigadores y responsables del manejo de datos:</b>
+El jefe de proyecto de la sección realizada por la Fundación Tribu, es decir, las Encuesta deliberativa es Juan Vila(juan.vila@tribu.ong). Por su parte el Colegio Medico A.G. se encuentra representado por el jefe del departamento de política, Cristóbal Cuadrado (politicas@colegiomedico.cl), Fundación Tribu está representada por Tomás González (tomas@tribu.ong). Si usted tiene alguna pregunta o preocupación sobre esta investigación, por favor contacte XXX@aaaaa.cl, o al teléfono (56 2) 2978 xxxx.</p>
+
 <div class="text-center">
 	<a href="{{ url_for('auth.register') }}" class="btn btn-large btn-info">Registrate para empezar!</a><br><br>
 	<a href="{{ url_for('auth.login') }}" class="small">Ya tienes un usuario? Inicia sesión</a>
 </div>
 
-{% else %}
-<div class="text-center">
-	<a href="{{ url_for('main.questionaire') }}" class="btn btn-lg btn-info">Continue al cuestionario</a>
-</div>
-
-{% endif %}
 {% endblock %}

@@ -8,6 +8,11 @@ body {
   left: 0;
 }
 
+.bar {
+  display: inline-block;
+  width: 50%;
+}
+
 .video-container {
   position: relative;
   overflow: hidden;
@@ -17,6 +22,24 @@ body {
   width: 70%;
   padding-top: 39.37%;  /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) 
   /*padding-top: 56.25%;*/
+}
+
+/*.questionaire ul {
+  text-align: left;
+}*/
+
+.questionaire ul {
+  /*list-style-position: inside;*/
+  padding-left: 0px;
+}
+
+.questionaire ul li label{
+  font-weight: normal;
+
+}
+
+.questionaire ul li::marker {
+  color: white;
 }
 
 .google-form-container {

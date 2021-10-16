@@ -41,7 +41,7 @@ class RegistrationForm(MyBaseForm, FlaskForm):
                               validators=[DataRequired(), EqualTo('password')])
     verification_code = StringField('Codigo de verificación (*)',
                                     validators=[DataRequired()])
-    consent_bool = BooleanField("Aceptas los terminos y condiciones?",
+    consent_bool = BooleanField("He leído y acepto los términos y condiciones de uso de la plataforma",
                                 validators=[DataRequired()])
     submit = SubmitField('Registrarse')
 

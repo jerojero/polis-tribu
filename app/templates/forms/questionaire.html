@@ -1,38 +1,51 @@
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
+
 {% block app_content %}
 	{% if current_user.doctor %}
 	<div class="google-form-container">
 		<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdR7N6gKdWzHEnpZgv-iPCQf18xqCI2b-RY2LR40PGjuCj1TA/viewform?embedded=true">Loading…</iframe>
 	</div>
 	{% else %}
-	<div class="text-center">
+
+	<div class="text-center questionaire">
 		{% for question in section.questions.all() %}
 			{% if question.question_type == "hd" %}
 				<h1>{{ question.title }}</h1>
 				<p>{{ question.description }}</p>
 			{% endif %}
 		{% endfor %}
+	</div>
 		
-		<form class="form form-horizontal" method="post" role="form" novalidate>
-		{{ form.hidden_tag() }}
-		{% for field in form if field.widget.input_type != 'hidden' %}
-			{% if field.type != "SubmitField" %}
-				<br>
-  				{{ field.label }}<br>
-  				{{ field(size=32 )}}<br>
-  			{% endif %}
-		{% endfor %}
-		{% if section.id > 1%}
-			{% set prev_section = section.id - 1%}
-			<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
-		{% endif %}
-		{% if not section.tail %}
-			{{ form.next(class="btn btn-default") }}
-		{% endif %}
-		</form>
-
-    </div>
+	<div class="questionaire col-md-offset-2 col-md-8">
+		<div class="text-center">
+			<form method="post" role="form" novalidate>
+			{{ form.hidden_tag() }}
+				{% for field in form if field.widget.input_type != 'hidden' %}
+					{% if field.type != "SubmitField" %}
+						<br>
+		  				<h4>{{ field.label }}</h4>
+		  				{% if field.type == "IntegerRangeField" %}
+			  					<span class="disappear" style="margin-right: 1em">Totalmente en desacuerdo</span> <span class="bar">{{ field() }}</span> <span class="disappear" style="margin-left: 1em">Totalmente de acuerdo</span><br>
+			  					<output for="fader" id="output{{ field.render_kw['class'] }}">
+			  						{{ field.default }}
+			  					</output><br>
+		  				{% else %}
+		  						{{ field(size=32)}}<br>
+		  				{% endif %}
+		  			{% endif %}
+				{% endfor %}
+					{% if section.id > 1%}
+						{% set prev_section = section.id - 1%}
+						<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
+					{% endif %}
+					{% if not section.tail %}
+						{{ form.next(class="btn btn-default") }}
+					{% endif %}
+				</div>
+			</form>
+		</div>
+	</div>
 	{% endif %}
 {% endblock %}

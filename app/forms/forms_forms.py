@@ -82,13 +82,11 @@ def make_question_form(question, user):
         title = question.title
         if not question.optional:
             title = title + ' (*)'
-            validators = DataRequired()
-        else:
-            validators = Optional()
-        form = IntegerRangeField(label=title, validators=[
-                                 validators], default=default,
+        form = IntegerRangeField(label=title, default=default,
                                  render_kw={'min': '0',
-                                            'max': '10', 'step': '1'})
+                                            'max': '10', 'step': '1',
+                                            'class': f'{question.id}',
+                                            'oninput': f'outputUpdate(value, "output{question.id}")'})
         return (f"question_{question.id}", form)
     else:
         return None
