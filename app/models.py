@@ -21,6 +21,7 @@ from wtforms.validators import Optional, DataRequired
 class Results(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     answers = db.Column(db.Text)
+    answer_text = db.Column(db.Text)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -153,6 +154,12 @@ class Section(db.Model):
     tail = db.Column(db.Boolean)
     questions = db.relationship(
         "Question", backref="section", lazy="dynamic")
+
+    def get_previous_section(self):
+        took_me_here = Answer.query.filter_by(next_question=self.id).first()
+        if not took_me_here:
+            return self.id - 1
+        return Question.query.get(took_me_here.question_id).section_id
 
 
 @ login.user_loader

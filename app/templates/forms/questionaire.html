@@ -13,12 +13,14 @@
 		{% for question in section.questions.all() %}
 			{% if question.question_type == "hd" %}
 				<h1>{{ question.title }}</h1>
-				<p>{{ question.description }}</p>
+				{% if question.description != 'nan' %}
+					<p>{{ question.description }}</p>
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 	</div>
 		
-	<div class="questionaire col-md-offset-2 col-md-8">
+	<div class="questionaire col-md-offset-1 col-md-10">
 		<div class="text-center">
 			<form method="post" role="form" novalidate>
 			{{ form.hidden_tag() }}
@@ -27,18 +29,20 @@
 						<br>
 		  				<h4>{{ field.label }}</h4>
 		  				{% if field.type == "IntegerRangeField" %}
-			  					<span class="disappear" style="margin-right: 1em">Totalmente en desacuerdo</span> <span class="bar">{{ field() }}</span> <span class="disappear" style="margin-left: 1em">Totalmente de acuerdo</span><br>
+{# 			  					<span class="disappear" style="margin-right: 1em">Totalmente en desacuerdo (0)</span> <span class="bar">{{ field() }}</span> <span class="disappear" style="margin-left: 1em">Totalmente de acuerdo (10)</span><br>
 			  					<output for="fader" id="output{{ field.render_kw['class'] }}">
-			  						{{ field.default }}
-			  					</output><br>
+			  						{{ field.render_kw['default_text'] }}
+			  					</output><br> #}
+			  					{# {{ field(size=32, class="horizontal") }} #}
 		  				{% else %}
-		  						{{ field(size=32)}}<br>
+		  						{{ field(size=32) }}<br>
 		  				{% endif %}
 		  			{% endif %}
 				{% endfor %}
 					{% if section.id > 1%}
-						{% set prev_section = section.id - 1%}
+						{% set prev_section = section.get_previous_section() %}
 						<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
+						{# {{ form.previous(class="btn btn-default") }} #}
 					{% endif %}
 					{% if not section.tail %}
 						{{ form.next(class="btn btn-default") }}

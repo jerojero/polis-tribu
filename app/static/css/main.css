@@ -33,13 +33,33 @@ body {
   padding-left: 0px;
 }
 
+.questionaire ul li {
+  /*list-style-position: inside;*/
+  margin-bottom: 1em;
+}
+
 .questionaire ul li label{
   font-weight: normal;
+  display: inline;
+
+}
+
+.questionaire ul li input{
+  display: inline;
 
 }
 
 .questionaire ul li::marker {
   color: white;
+}
+
+.questionaire ul.horizontal > li {
+    display: inline-block;
+    margin: 1em;
+    /* You can also add some margins here to make it look prettier */
+    zoom:1;
+    *display:inline;
+    /* this fix is needed for IE7- */
 }
 
 .google-form-container {

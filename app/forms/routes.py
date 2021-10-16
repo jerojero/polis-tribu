@@ -29,7 +29,6 @@ def questionaire(section_id=None):
             _form.append(make_question_form(question, current_user))
 
     _form.append(("next", SubmitField("Siguiente")))
-    _form.append(("previous", SubmitField("Atrás")))
 
     form = create_questionaire(_form)()
 
@@ -47,7 +46,15 @@ def questionaire(section_id=None):
                 if q:
                     db.session.delete(q)
                 answer = getattr(form, f"question_{question.id}").data
-                r = Results(id=result_id, answers=answer, question_id=question.id,
+                if question.question_type == "mc":
+                    answerObj = Answer.query.get(
+                        getattr(form, f"question_{question.id}").data)
+                    answer_text = answerObj.text
+                    if answerObj.next_question != 0:
+                        next_section = answerObj.next_question
+                else:
+                    answer_text = answer
+                r = Results(id=result_id, answers=answer, answer_text=answer_text, question_id=question.id,
                             user_id=current_user.id)
                 db.session.add(r)
                 db.session.commit()

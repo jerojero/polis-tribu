@@ -19,6 +19,55 @@ def load_users(csv):
     db.session.commit()
 
 
+def load_questions(csv):
+    df = pd.read_csv(csv)
+    for row in df.iloc:
+        tail = bool(row['last'])
+        if not Section.query.get(int(row['section'])):
+            create_section(tail)
+        q = Question(
+            id=int(row['id']),
+            question_type=str(row['q_type']),
+            section_id=int(row['section']),
+            title=str(row['title']),
+            description=str(row['description']),
+            optional=bool(row['optional']),
+            tail=tail
+        )
+        db.session.add(q)
+    db.session.commit()
+
+
+def load_answers(csv):
+    df = pd.read_csv(csv)
+    for row in df.iloc:
+        a = Answer(
+            text=row['text'],
+            next_question=int(row['special']),
+            question_id=int(row['question'])
+        )
+        db.session.add(a)
+    db.session.commit()
+
+
+def load_all(question_csv="questions.csv", answers_csv="answers.csv"):
+    load_questions(question_csv)
+    load_answers(answers_csv)
+
+
+def delete_all():
+    for s in Section.query.all():
+        db.session.delete(s)
+
+    for q in Question.query.all():
+        db.session.delete(q)
+
+    for a in Answer.query.all():
+        db.session.delete(a)
+
+    db.session.commit()
+
+
 def capitalize_first(name):
     capitalized_name = ' '.join([word.lower().capitalize()
                                  for word in name.split(' ')])

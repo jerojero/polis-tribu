@@ -1,5 +1,6 @@
 from app import create_app, db
 from app.models import User, Lxs400, Question, Answer, Section, Results
+from app.utils import delete_all, load_all
 
 
 app = create_app()
@@ -13,4 +14,6 @@ def make_shell_context():
             'Question': Question,
             'Answer': Answer,
             'Section': Section,
-            'Results': Results}
+            'Results': Results,
+            'delete_all': delete_all,
+            'load_all': load_all, }
