@@ -63,7 +63,7 @@
 				{% endfor %}
 					{% if prev_section %}
 					{% if section.tail %}
-						<a href="{{ url_for('main.index' }}" class="btn btn-default">Inicio</a>
+						<a href="{{ url_for('main.index') }}" class="btn btn-default">Inicio</a>
 					{% else %}
 					<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
 					{% endif %}
