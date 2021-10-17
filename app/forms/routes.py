@@ -63,7 +63,7 @@ def questionaire(section_id=None):
                 rut = form.rut.data
                 bank = form.bank.data
                 account = form.account.data
-                account_number = str(form.account_number)
+                account_number = str(form.account_number.data)
                 third_party = form.third_party.data
                 r = Payment(first_name=name,
                             last_name=last_name,
