@@ -13,10 +13,6 @@ import string
 from time import time
 import jwt
 
-# Form stuff
-from wtforms import RadioField
-from wtforms.validators import Optional, DataRequired
-
 
 class Results(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,6 +23,18 @@ class Results(db.Model):
 
     def __repr__(self):
         return f"<ID: {self.id}, User: {self.user_id}, Question: {self.question_id}, Answer: {self.answers}>\n"
+
+
+class Payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(64))
+    last_name = db.Column(db.String(64))
+    rut = db.Column(db.String(64))
+    bank = db.Column(db.String(64))
+    account = db.Column(db.String(64))
+    account_number = db.Column(db.String(64))
+    permission = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class User(UserMixin, db.Model):
@@ -44,10 +52,13 @@ class User(UserMixin, db.Model):
     doctor = db.Column(db.Boolean)
     has_visited = db.Column(db.Boolean)
     last_question = db.Column(db.Integer)
+    contact = db.Column(db.String(64))
     lxs400_vc = db.Column(db.String(64),
                           db.ForeignKey('lxs400.verification_code'))
     result = db.relationship('Results', backref='user',
                              uselist=False, cascade="all")
+    bank_info = db.relationship('Payment', backref='user',
+                                uselist=False, cascade="all")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

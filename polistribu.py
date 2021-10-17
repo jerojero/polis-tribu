@@ -1,5 +1,5 @@
 from app import create_app, db
-from app.models import User, Lxs400, Question, Answer, Section, Results
+from app.models import User, Lxs400, Question, Answer, Section, Results, Payment
 from app.utils import delete_all, load_all, delete_response
 
 
@@ -17,4 +17,5 @@ def make_shell_context():
             'Results': Results,
             'delete_all': delete_all,
             'load_all': load_all,
-            'delete_response': delete_response, }
+            'delete_response': delete_response,
+            'Payment': Payment}

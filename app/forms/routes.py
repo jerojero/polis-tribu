@@ -7,7 +7,7 @@ from .forms_forms import create_questionaire, make_question_form
 from .forms_forms import AddQuestionForm, AddAnswerForm, LinkQuestionsForm
 from wtforms import RadioField, StringField, BooleanField, SubmitField
 from wtforms.validators import Optional
-from app.models import Question, Section, Results, Answer
+from app.models import Question, Section, Results, Answer, Payment
 
 # utils
 from app.utils import create_question, create_section, create_answer
@@ -23,14 +23,25 @@ def questionaire(section_id=None):
     current_app.logger.info(f"Section: {section}")
 
     _form = []
+    _form_special = None
 
     for question in section.questions.all():
-        if question.question_type != "hd":
+        if question.question_type == "hd":
+            continue
+
+        elif question.question_type == "fc":
+            _form_special = make_question_form(question, current_user)
+        elif question.question_type == "fp":
+            _form_special = make_question_form(question, current_user)
+        else:
             _form.append(make_question_form(question, current_user))
 
     _form.append(("next", SubmitField("Siguiente")))
 
-    form = create_questionaire(_form)()
+    if not _form_special:
+        form = create_questionaire(_form)()
+    else:
+        form = _form_special()
 
     if form.validate_on_submit():
         current_app.logger.info("Validated on submit")
@@ -40,7 +51,31 @@ def questionaire(section_id=None):
             next_section = section.id - 1
 
         for question in section.questions.all():
-            if question.question_type != "hd":
+            if question.question_type == "hd":
+                continue
+            elif question.question_type == "fc":
+                contact_method = form.contact_method.data
+                current_user.contact = contact_method
+                db.session.commit()
+            elif question.question_type == "fp":
+                name = form.name.data
+                last_name = form.last_name.data
+                rut = form.rut.data
+                bank = form.bank.data
+                account = form.account.data
+                account_number = str(form.account_number)
+                third_party = form.third_party.data
+                r = Payment(first_name=name,
+                            last_name=last_name,
+                            rut=rut,
+                            bank=bank,
+                            account=account,
+                            account_number=account_number,
+                            permission=third_party,
+                            user_id=current_user.id)
+                db.session.add(r)
+                db.session.commit()
+            else:
                 result_id = int(f"{current_user.id}00{question.id}")
                 current_app.logger.info(f"Result id: {result_id}")
                 q = Results.query.get(result_id)
@@ -82,13 +117,6 @@ def add_question():
         section_id = int(question_form.section.data)
         optional = question_form.optional.data
         tail = question_form.optional.data
-        current_app.logger.info(f"""Question fsields:
-                                          Title: {title}
-                                          QType: {question_type}
-                                          Descr: {description}
-                                          SecID: {section_id}
-                                          Optio: {optional}
-                                """)
 
         if not Section.query.get(section_id):
             create_section(tail=tail)

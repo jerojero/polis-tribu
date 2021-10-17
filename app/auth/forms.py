@@ -34,7 +34,7 @@ class RegistrationForm(MyBaseForm, FlaskForm):
                          validators=[DataRequired(), EqualTo('email')])
     phone = StringField('Numero de teléfono (*)',
                         validators=[DataRequired()],
-                        description="Ej: +56936201943")
+                        description="Ej: +569xxxxxxxx")
     password = PasswordField('Contraseña (*)',
                              validators=[DataRequired()])
     password2 = PasswordField('Repetir contraseña (*)',
@@ -86,10 +86,20 @@ class RegistrationForm(MyBaseForm, FlaskForm):
 
     def validate_phone(self, phone):
         phone_n = phone.data
+        v_error = ValidationError('Número de teléfono no es '
+                                  'válido.')
         if not ((phone_n[0] == '+' or phone_n[0].isdigit()) and
                 phone_n[1:].isdigit()):
-            raise ValidationError('Número de teléfono no es '
-                                  'válido.')
+            raise v_error
+
+        if (phone_n[0] == '+') and (len(phone_n) != 12):
+            raise v_error
+
+        if not (phone_n[0] == '+'):
+            print(len(phone_n))
+            print(phone_n)
+            if not (9 <= len(phone_n) <= 11) or (len(phone_n) == 10):
+                raise v_error
 
 
 class ResetPasswordRequestForm(FlaskForm):

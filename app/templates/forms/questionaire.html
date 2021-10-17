@@ -19,23 +19,41 @@
 			{% endif %}
 		{% endfor %}
 	</div>
-		
+
+	{% if section.id > 1%}
+		{% set prev_section = section.get_previous_section() %}
+	{% endif %}	
+
 	<div class="questionaire col-md-offset-1 col-md-10">
 		<div class="text-center">
+{# 			{% if form['special_form']  %}
+
+					{{ wtf.quick_form(form)}}
+					<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
+
+			{% else %} #}
 			<form method="post" role="form" novalidate>
 			{{ form.hidden_tag() }}
 				{% for field in form if field.widget.input_type != 'hidden' %}
 					{% if field.type != "SubmitField" %}
 						<br>
-		  				<h4>{{ field.label }}</h4>
 		  				{% if field.type == "IntegerRangeField" %}
 			  				<span class="disappear" style="margin-right: 1em">Totalmente en desacuerdo (0)</span> <span class="bar">{{ field(class="horizontal", required='required') }}</span> <span class="disappear" style="margin-left: 1em">Totalmente de acuerdo (10)</span><br>
 			  				<output for="fader" id="output{{ field.render_kw['class'] }}">
 			  					{{ field.render_kw['default_text'] }}
 			  				</output><br>
 			  				{# {{ field(size=32, class="horizontal", required='required') }} #}
+			  			{% elif field.type == "SelectField" %}
+			  				{{ wtf.form_field(field) }}
+
+			  			{% elif field.type == "BooleanField" %}
+			  				{{ wtf.form_field(field) }}
 		  				{% else %}
-		  						{{ field(size=32) }}
+		  					<h4>{{ field.label }}</h4>
+		  					{{ field(size=32) }}
+		  					{% if field.description %}
+		  					<br>{{ field.description }}
+		  					{% endif %}
 		  				{% endif %}
 		  			{% endif %}
 		  			<br>
@@ -43,16 +61,16 @@
             			<span style="color: red;">[{{ error }}]</span>
             		{% endfor %}
 				{% endfor %}
-					{% if section.id > 1%}
-						{% set prev_section = section.get_previous_section() %}
-						<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
-						{# {{ form.previous(class="btn btn-default") }} #}
+					{% if prev_section %}
+					<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
 					{% endif %}
-					{% if not section.tail %}
-						{{ form.next(class="btn btn-default") }}
-					{% endif %}
-				</div>
+					{# {{ form.previous(class="btn btn-default") }} #}
+				{% if not section.tail %}
+					{# <a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a> #}
+					{{ form.next(class="btn btn-default") }}
+				{% endif %}
 			</form>
+			{# {% endif %} #}
 		</div>
 	</div>
 	{% endif %}
