@@ -28,9 +28,34 @@ body {
   text-align: left;
 }*/
 
+.questionaire label {
+  max-width: 70rem;
+  text-align: justify;
+}
+
 .questionaire ul {
   /*list-style-position: inside;*/
   padding-left: 0px;
+}
+
+.questionaire p {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: justify;
+}
+
+.questionaire ul.vertical {
+  /*list-style-position: inside;*/
+  padding-left: 0px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70rem;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .questionaire ul li {

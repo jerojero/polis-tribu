@@ -42,6 +42,7 @@ def questionaire(section_id=None):
         for question in section.questions.all():
             if question.question_type != "hd":
                 result_id = int(f"{current_user.id}00{question.id}")
+                current_app.logger.info(f"Result id: {result_id}")
                 q = Results.query.get(result_id)
                 if q:
                     db.session.delete(q)

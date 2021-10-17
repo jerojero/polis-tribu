@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField
 from wtforms import IntegerField, SelectField
 from wtforms import RadioField, TextAreaField
+from wtforms import FormField, FieldList
 from wtforms.fields.html5 import IntegerRangeField
 from wtforms.validators import DataRequired, Optional, InputRequired, Required
 from app.models import Results
@@ -13,13 +14,12 @@ class MyBaseForm(FlaskForm):
         locales = ['es_ES', 'es']
 
 
-def create_questionaire(fields_list):
-    class MultipleChoice(MyBaseForm):
-        pass
-    cls = MultipleChoice
-    for fields in fields_list:
-        setattr(cls, *fields)
-    return cls
+class SelectForm(MyBaseForm):
+    select = SelectField("Placeholder", choices=[])
+
+
+class SelectFormList(SelectForm):
+    select_entries = FieldList(FormField(SelectForm))
 
 
 class AddQuestionForm(MyBaseForm):
@@ -50,6 +50,15 @@ class LinkQuestionsForm(MyBaseForm):
     submit = SubmitField("Link both questions")
 
 
+def create_questionaire(fields_list):
+    class MultipleChoice(MyBaseForm):
+        pass
+    cls = MultipleChoice
+    for fields in fields_list:
+        setattr(cls, *fields)
+    return cls
+
+
 def make_question_form(question, user):
     default = None
     result = Results.query.get(int(f"{user.id}00{question.id}"))
@@ -65,18 +74,19 @@ def make_question_form(question, user):
         choices = [(answer.id, answer.text) for answer in answers]
         if not question.optional:
             title = title + ' (*)'
-            validators = DataRequired()
+            validators = DataRequired("Debe ingresar una opción.")
         else:
             validators = Optional()
         form = RadioField(label=title, choices=choices,
-                          validators=[validators], default=default)
+                          validators=[validators], default=default,
+                          render_kw={'class': 'vertical'})
         return (f"question_{question.id}", form)
 
     elif question.question_type == "st":
         title = question.title
         if not question.optional:
             title = title + ' (*)'
-            validators = DataRequired()
+            validators = DataRequired(message="Debe completar la pregunta.")
         else:
             validators = Optional()
         form = StringField(label=title, validators=[
@@ -87,7 +97,7 @@ def make_question_form(question, user):
         title = question.title
         if not question.optional:
             title = title + ' (*)'
-            validators = [Required(), DataRequired(), InputRequired()]
+            validators = [DataRequired("Debe ingresar una opción.")]
         else:
             validators = [Optional()]
         choices = [(x, str(x)) for x in range(11)]
@@ -112,7 +122,6 @@ def make_question_form(question, user):
         #                              validators=validators,)
         form = RadioField(label=title, choices=choices,
                           validators=validators, default=default, render_kw={'class': 'horizontal'})
-        return (f"question_{question.id}", form)
         return (f"question_{question.id}", form)
 
     else:

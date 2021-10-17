@@ -29,15 +29,19 @@
 						<br>
 		  				<h4>{{ field.label }}</h4>
 		  				{% if field.type == "IntegerRangeField" %}
-{# 			  					<span class="disappear" style="margin-right: 1em">Totalmente en desacuerdo (0)</span> <span class="bar">{{ field() }}</span> <span class="disappear" style="margin-left: 1em">Totalmente de acuerdo (10)</span><br>
-			  					<output for="fader" id="output{{ field.render_kw['class'] }}">
-			  						{{ field.render_kw['default_text'] }}
-			  					</output><br> #}
-			  					{# {{ field(size=32, class="horizontal") }} #}
+			  				<span class="disappear" style="margin-right: 1em">Totalmente en desacuerdo (0)</span> <span class="bar">{{ field(class="horizontal", required='required') }}</span> <span class="disappear" style="margin-left: 1em">Totalmente de acuerdo (10)</span><br>
+			  				<output for="fader" id="output{{ field.render_kw['class'] }}">
+			  					{{ field.render_kw['default_text'] }}
+			  				</output><br>
+			  				{# {{ field(size=32, class="horizontal", required='required') }} #}
 		  				{% else %}
-		  						{{ field(size=32) }}<br>
+		  						{{ field(size=32) }}
 		  				{% endif %}
 		  			{% endif %}
+		  			<br>
+		  			{% for error in field.errors %}
+            			<span style="color: red;">[{{ error }}]</span>
+            		{% endfor %}
 				{% endfor %}
 					{% if section.id > 1%}
 						{% set prev_section = section.get_previous_section() %}

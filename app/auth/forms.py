@@ -21,12 +21,12 @@ class LoginForm(MyBaseForm):
 class RegistrationForm(MyBaseForm, FlaskForm):
     username = StringField('Nombre de usuario (*)',
                            validators=[DataRequired()])
-    name = StringField('Nombre(s) (*)',
+    name = StringField('Nombre (*)',
                        validators=[DataRequired()],
-                       description="Ej: Juan Ignacio")
-    last_name = StringField('Apellido(s) (*)',
+                       description="Ej: Juan")
+    last_name = StringField('Apellido (*)',
                             validators=[DataRequired()],
-                            description="Ej: Pérez Paredes")
+                            description="Ej: Pérez")
     email = StringField('Correo electrónico (*)',
                         validators=[DataRequired(), Email()],
                         description="Ej: alex@ejemplo.com")

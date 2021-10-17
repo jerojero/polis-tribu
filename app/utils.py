@@ -1,5 +1,5 @@
 import pandas as pd
-from app.models import Section, Lxs400, Question, Answer
+from app.models import Section, Lxs400, Question, Answer, Results
 from app import db
 
 
@@ -53,6 +53,16 @@ def load_answers(csv):
 def load_all(question_csv="questions.csv", answers_csv="answers.csv"):
     load_questions(question_csv)
     load_answers(answers_csv)
+
+
+def delete_response(question_type):
+    qs = Question.query.filter_by(question_type=question_type).all()
+    rs = [Results.query.filter_by(question_id=question.id).first(
+    ) for question in qs if Results.query.filter_by(
+        question_id=question.id).first() is not None]
+    for response in rs:
+        db.session.delete(response)
+    db.session.commit()
 
 
 def delete_all():
