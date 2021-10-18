@@ -69,6 +69,9 @@ def delete_response(question_type):
 
 
 def delete_all():
+    for r in Results.query.all():
+        db.session.delete(r)
+
     for s in Section.query.all():
         db.session.delete(s)
 
