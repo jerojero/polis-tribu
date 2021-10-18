@@ -17,7 +17,7 @@
 
 
 {% block title %}
-	Bienvenido a la consulta!
+	Bienvenidx a la consulta!
 {% endblock %}
 
 {% block navbar %}
@@ -27,9 +27,9 @@
 		{{ 'active' if request.path == url_for('main.index') else '' }}" >
 		<i class="fa fa-home"></i> <span class="disappear">Inicio</span></a>
 
-		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg
+{# 		<a href="{{ url_for('main.instructions') }}" class="btn btn-info btn-lg
 		{{ 'active' if request.path == url_for('main.instructions') else '' }}" >
-	    <i class="fa fa-book"></i> <span class="disappear">Instrucciones</span></a>
+	    <i class="fa fa-book"></i> <span class="disappear">Instrucciones</span></a> #}
 
 		{% if current_user.is_anonymous %}
 		<a href="{{ url_for('auth.register') }}" class="btn btn-info btn-lg

@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from app.models import Section, Lxs400, Question, Answer, Results
 from app import db
 
@@ -145,3 +146,13 @@ def create_answer(text, question_id, next_question=None):
                next_question=next_question)
     db.session.add(a)
     db.session.commit()
+
+
+def export_answers():
+    results = {'usuarios': [
+        f"{user.name} {user.last_name}"
+        for user in User.query.all()]}
+
+    for question in Question.query.all():
+        if question.question_type not in ['hd', 'fp', 'fc']:
+            results[question.id] = []

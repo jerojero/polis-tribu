@@ -1,5 +1,5 @@
 # Google Forms
-This implementation simply changes polis for a simple Google Form
+This is an implementation for a questionaire
 
 # Requirements
 Written in Python 3.9
@@ -24,6 +24,7 @@ The easiest way is to simply create a virtual environment using `pipenv` and ins
 Configuration is done through a `.env` file which has to include the following parameters:
 ```
 FLASK_APP=<name of flask app>
+ADMIN=<user id>
 MAIL_SERVER='smtp.gmail.com'
 MAIL_PORT=587
 MAIL_USE_TLS=1

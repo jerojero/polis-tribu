@@ -1,5 +1,5 @@
-from flask import render_template
-from flask import current_app
+from flask import render_template, current_app, url_for, redirect
+from flask_login import current_user, login_required
 # from flask_login import current_user, login_required
 from .main_email import send_automated_email
 from .main_forms import EmailForm
@@ -15,9 +15,9 @@ def index():
     return render_template('main/index.html')
 
 
-@bp.route('/instructions/')
-def instructions():
-    return render_template('main/instructions.html')
+# @bp.route('/instructions/')
+# def instructions():
+#     return render_template('main/instructions.html')
 
 
 @bp.route('/terms_and_conditions/')
@@ -26,8 +26,10 @@ def terms_and_conditions():
 
 
 @bp.route('/automated_email/', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def automated_email():
+    if str(current_user.id) not in current_app.config['ADMINISTRATORS']:
+        return redirect(url_for('main.index'))
     form = EmailForm()
     if form.validate_on_submit():
         file_name = form.csv.data
