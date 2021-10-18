@@ -1,6 +1,6 @@
 Hola {{ name }}!
 
-Junto con saludarte quisiéramos agradecerte nuevamente por su participación en el proceso deliberativo de Lxs 400. La participación de cada uno de Lxs 400 fue tremendamente importante para el éxito de dicho proyecto.
+Junto con saludarte quisiéramos agradecerte nuevamente por tu participación en el proceso deliberativo de Lxs 400. La participación de cada uno de Lxs 400 fue tremendamente importante para el éxito de dicho proyecto.
 
 Estamos cerca de la elección presidencial, la cual ha sido antecedida por una profunda crisis política, social, así como también sanitaria que dio cuenta de la necesidad de realizar reformas importantes a nuestro sistema de salud, reformas que deben recoger los intereses, opiniones, preferencias, necesidades y distintas perspectivas de la ciudadanía.
 

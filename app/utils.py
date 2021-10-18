@@ -34,6 +34,9 @@ def load_questions(csv):
             optional=bool(row['optional']),
             tail=tail
         )
+        print(f"""Question ID: {row['id']}
+                  Section ID: {row['section']}
+               """)
         db.session.add(q)
     db.session.commit()
 
