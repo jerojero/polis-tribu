@@ -8,6 +8,9 @@ from app.main import bp
 from config import basedir
 import os
 
+# models
+from app.models import User
+
 
 @bp.route('/')
 @bp.route('/index')
@@ -40,11 +43,12 @@ def automated_email():
         if os.path.exists(full_file_path):
             everyone = email_code(os.path.join(basedir, f'{file_name}.csv'))
             for person in everyone:
-                send_automated_email(
-                    email_name,
-                    email_title,
-                    person[1],
-                    verification_code=person[2],
-                    name=person[0]
-                )
+                if not User.query.filter_by(lxs400_vc=person[2]).first():
+                    send_automated_email(
+                        email_name,
+                        email_title,
+                        person[1],
+                        verification_code=person[2],
+                        name=person[0]
+                    )
     return render_template('main/automated_email.html', form=form)
