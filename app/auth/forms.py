@@ -74,12 +74,12 @@ class RegistrationForm(MyBaseForm, FlaskForm):
             raise ValidationError('Rut es inválido.')
 
     def validate_verification_code(self, verification_code):
-        lxs400 = Lxs400.query.filter_by(
-            verification_code=verification_code.data).first()
+        vf = verification_code.data.replace(" ", "")
+        lxs400 = Lxs400.query.filter_by(verification_code=vf).first()
         if lxs400 is None:
             raise ValidationError('Código de verificación no es válido.')
 
-        if User.query.filter_by(lxs400_vc=verification_code.data).first():
+        if User.query.filter_by(lxs400_vc=vf).first():
             raise ValidationError("Alguien ya está usando este código de "
                                   "verificación. Porfavor contacte al "
                                   "administrador.")

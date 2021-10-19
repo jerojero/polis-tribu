@@ -77,8 +77,8 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         doctor = True if len(form.verification_code.data) == 7 else False
-        lxs400 = Lxs400.query.filter_by(
-            verification_code=form.verification_code.data).first()
+        vf = form.verification_code.data.replace(" ", "")
+        lxs400 = Lxs400.query.filter_by(verification_code=vf).first()
         user = User(username=form.username.data,
                     name=norm_names(form.name.data),
                     last_name=norm_names(form.last_name.data),
