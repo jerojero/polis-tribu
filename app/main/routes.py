@@ -1,4 +1,5 @@
 from flask import render_template, current_app, url_for, redirect
+from flask import send_file
 from flask_login import current_user, login_required
 # from flask_login import current_user, login_required
 from .main_email import send_automated_email
@@ -7,6 +8,8 @@ from app.utils import email_code
 from app.main import bp
 from config import basedir
 import os
+import io
+import base64
 
 # models
 from app.models import User
@@ -21,6 +24,14 @@ def index():
 # @bp.route('/instructions/')
 # def instructions():
 #     return render_template('main/instructions.html')
+
+@bp.route('/pixel/<codigo>')
+def pixel(codigo):
+    # user = request.args.get['codigo']
+    gif = 'R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+    gif_str = base64.b64decode(gif)
+    current_app.logger.info(f"Action Tracked for user {codigo}")
+    return send_file(io.BytesIO(gif_str), mimetype='image/gif')
 
 
 @bp.route('/terms_and_conditions/')
