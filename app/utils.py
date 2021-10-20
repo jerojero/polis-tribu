@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from app.models import Section, Lxs400, Question, Answer, Results
 from app import db
+from datetime import datetime
 
 
 def generate_codes():
@@ -40,6 +41,20 @@ def load_questions(csv):
                """)
         db.session.add(q)
     db.session.commit()
+
+
+def get_current_time() -> str:
+    return datetime.utcnow().strftime('%d-%m-%YT%H:%M:%S')
+
+
+def save_email_open_times(codigo: str, email: str) -> None:
+    df = pd.read_csv('opened_email.csv', index_col=0)
+    try:
+        df.at[codigo, email] = get_current_time()
+    except Exception:
+        df[email] = ''
+        df.at[codigo, email] = get_current_time()
+    df.to_csv('opened_email.csv')
 
 
 def load_answers(csv):

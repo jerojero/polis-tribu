@@ -14,6 +14,9 @@ import base64
 # models
 from app.models import User
 
+# utils
+from app.utils import save_email_open_times
+
 
 @bp.route('/')
 @bp.route('/index')
@@ -25,12 +28,12 @@ def index():
 # def instructions():
 #     return render_template('main/instructions.html')
 
-@bp.route('/pixel/<codigo>')
-def pixel(codigo):
+@bp.route('/pixel/<email>/<codigo>')
+def pixel(codigo, email):
     # user = request.args.get['codigo']
     gif = 'R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
     gif_str = base64.b64decode(gif)
-    current_app.logger.info(f"Action Tracked for user {codigo}")
+    save_email_open_times(codigo, email)
     return send_file(io.BytesIO(gif_str), mimetype='image/gif')
 
 
