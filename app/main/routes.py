@@ -15,7 +15,7 @@ import base64
 from app.models import User, Payment
 
 # utils
-from app.utils import save_email_open_times
+from app.utils import save_email_open_times, save_responses
 
 
 @bp.route('/')
@@ -80,8 +80,12 @@ def download():
     if form.validate_on_submit():
         download = form.download.data
         if download == 'email':
-            current_app.logger.info('requested email')
             return send_file('../opened_email.csv')
+        elif download == 'responses':
+            save_responses(current_app)
+            return send_file('../respuestas.csv')
+        elif download == 'questions':
+            return send_file('../questions.csv')
 
     return render_template('main/download.html',
                            form=form,

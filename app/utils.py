@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from app.models import Section, Lxs400, Question, Answer, Results
+from app.models import Section, Lxs400, Question, Answer, Results, User
 from app import db
 from datetime import datetime
 
@@ -41,6 +41,38 @@ def load_questions(csv):
                """)
         db.session.add(q)
     db.session.commit()
+
+
+def save_responses(current_app):
+    users = [user_id[0] for user_id in
+             db.session.query(Results.user_id).distinct().all()
+             if str(user_id[0]) not in current_app.config['ADMINISTRATORS']]
+    questions = [question_id[0] for question_id in db.session.query(
+        Results.question_id).distinct().all()]
+    df = pd.DataFrame(index=users, columns=['codigo', 'nombre'] + questions)
+    df.index.rename(name='user_id')
+
+    for question in questions:
+        qs = []
+        for user in df.index:
+            r = Results.query.filter_by(
+                question_id=question, user_id=user).first()
+            if r:
+                qs.append(r.answer_text)
+            else:
+                qs.append("")
+        df[question] = qs
+
+    codigos = []
+    nombres = []
+    for user in df.index:
+        codigos.append(User.query.get(user).lxs400_vc)
+        nombres.append(User.query.get(
+            user).name + " " + User.query.get(user).last_name)
+    df['nombre'] = nombres
+    df['codigo'] = codigos
+
+    df.to_csv('respuestas.csv')
 
 
 def get_current_time() -> str:
