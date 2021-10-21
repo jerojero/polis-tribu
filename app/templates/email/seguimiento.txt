@@ -1,0 +1,25 @@
+Hola {{ name }}!
+
+Junto con saludarte y tal como te comentamos en el email anterior, queremos invitarte a  repensar nuestro sistema de salud. Para esto el Colegio Médico ha impulsado una consulta ciudadana que tiene como objetivo recoger los intereses, opiniones, preferencias, necesidades y distintas perspectivas de la ciudadanía. 
+
+Tu opinión importa, y es por eso que te invitamos a pensar en el sistema de salud que queremos para Chile. ¿Cómo? participando en esta consulta ciudadana y proceso deliberativo, el cual permitirá identificar y/o profundizar diferentes alternativas que sean consideradas más deseables para todas y todos, así desde esas conclusiones poder proponer reformas en salud que no solo reflejen lo técnico sino que también las necesidades y consideraciones de todas las personas.
+
+¿Cómo funciona esta consulta?
+
+1. Con este enlace y código único podrás registrarte de manera fácil y rápida en nuestra plataforma para así contestar la encuesta que tomará aproximadamente 25 minutos. 
+
+	https://www.chilexchile.cl/
+
+	Código de registro: {{ verification_code }}
+
+Por el solo hecho de contestar la encuesta habrá una compensación de $8.000, la transferencia se realizará el día 01 de Noviembre de 2021. Para esto, te preguntaremos al final del formulario tus preferencias y datos para hacer la transferencia.
+
+2. A continuación, entre quienes contestaron la encuesta se realizará una selección vía sorteo para participar en un proceso deliberativo. Ell día y hora será informado una vez realizado el sorteo. Esta etapa concluye con una encuesta de cierre.
+
+Las personas que participen en esta etapa de la consulta recibirán una compensación de $15.000 a través de transferencia bancaria luego de haber completado y enviado la encuesta de cierre, la fecha de transferencia será informada al momento de la convocatoria.
+Si tienes preguntas o inquietudes, por favor no dudes en contactarnos al email delibera@tribu.ong o al whatsapp +56 9 73103575
+ 
+ 
+Saludos cordiales, 
+Fundacion Tribu
+
