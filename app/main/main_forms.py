@@ -20,3 +20,10 @@ class EmailForm(MyBaseForm):
                        render_kw={'placeholder':
                                   "codigos"})
     submit = SubmitField('Enviar')
+
+
+class DownloadForm(MyBaseForm):
+    download = SelectField('Nombre de la base de datos a descargar:',
+                           choices=[('email', 'Seguimiento de email')],
+                           validators=[DataRequired()])
+    submit = SubmitField('Descargar')

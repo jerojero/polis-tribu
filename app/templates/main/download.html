@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{# CSS: call_to_action, responsive_iframe #}
+
+{% block app_content %}
+	<div class="text-center sm-query">
+	<h1>Página de descargas</h1>
+	<br>
+		<h3>Usuarios registrados: {{ registered_users }}</h3>
+		<h3>Encuestas completadas: {{ completed_surveys }}</h3> 
+
+		{{ wtf.quick_form(form) }}
+	</div>
+{% endblock %}

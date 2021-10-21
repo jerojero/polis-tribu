@@ -3,7 +3,7 @@ from flask import send_file
 from flask_login import current_user, login_required
 # from flask_login import current_user, login_required
 from .main_email import send_automated_email
-from .main_forms import EmailForm
+from .main_forms import EmailForm, DownloadForm
 from app.utils import email_code
 from app.main import bp
 from config import basedir
@@ -12,7 +12,7 @@ import io
 import base64
 
 # models
-from app.models import User
+from app.models import User, Payment
 
 # utils
 from app.utils import save_email_open_times
@@ -66,3 +66,24 @@ def automated_email():
                         name=person[0]
                     )
     return render_template('main/automated_email.html', form=form)
+
+
+@bp.route('/download/', methods=['GET', 'POST'])
+@login_required
+def download():
+    if str(current_user.id) not in current_app.config['ADMINISTRATORS']:
+        return redirect(url_for('main.index'))
+    form = DownloadForm()
+    registered_users = User.query.count() - 3
+    completed_surveys = Payment.query.count() - 3
+
+    if form.validate_on_submit():
+        download = form.download.data
+        if download == 'email':
+            current_app.logger.info('requested email')
+            return send_file('../opened_email.csv')
+
+    return render_template('main/download.html',
+                           form=form,
+                           registered_users=registered_users,
+                           completed_surveys=completed_surveys)
