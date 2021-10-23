@@ -19,7 +19,7 @@ class LoginForm(MyBaseForm):
 
 
 class RegistrationForm(MyBaseForm, FlaskForm):
-    username = StringField('Nombre de usuario (*)',
+    username = StringField('Nombre de usuario para esta plataforma (*)',
                            validators=[DataRequired()])
     name = StringField('Nombre (*)',
                        validators=[DataRequired()],
@@ -35,7 +35,7 @@ class RegistrationForm(MyBaseForm, FlaskForm):
     phone = StringField('Numero de teléfono (*)',
                         validators=[DataRequired()],
                         description="Ej: +569xxxxxxxx")
-    password = PasswordField('Contraseña (*)',
+    password = PasswordField('Crear contraseña para esta plataforma (*)',
                              validators=[DataRequired()])
     password2 = PasswordField('Repetir contraseña (*)',
                               validators=[DataRequired(), EqualTo('password')])
