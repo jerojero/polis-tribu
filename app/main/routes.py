@@ -18,6 +18,9 @@ from app.models import User, Payment
 from app.utils import save_email_open_times, save_responses
 from app.utils import save_everyone_who_hasnt_answered
 
+# mail
+from random import randint
+
 
 @bp.route('/')
 @bp.route('/index')
@@ -57,14 +60,18 @@ def automated_email():
         current_app.logger.info(full_file_path)
         if os.path.exists(full_file_path):
             everyone = email_code(os.path.join(basedir, f'{file_name}.csv'))
+            accumulated_time = 0
             for person in everyone:
+                time = randint(5, 30)
+                accumulated_time += time
                 if not User.query.filter_by(lxs400_vc=person[2]).first():
                     send_automated_email(
                         email_name,
                         email_title,
                         person[1],
+                        accumulated_time,
                         verification_code=person[2],
-                        name=person[0]
+                        name=person[0],
                     )
     return render_template('main/automated_email.html', form=form)
 
