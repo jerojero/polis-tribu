@@ -108,7 +108,7 @@ def save_everyone_who_hasnt_answered() -> None:
     df3['codigos'] = list(codigos_noreg)
     df3['emails'] = list(emails)
     df3['p_numbers'] = list(p_numbers)
-    df.to_csv('not_registered.csv')
+    df3.to_csv('not_registered.csv')
 
 
 def load_answers(csv):
