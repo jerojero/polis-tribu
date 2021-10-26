@@ -89,6 +89,28 @@ def save_email_open_times(codigo: str, email: str) -> None:
     df.to_csv('opened_email.csv')
 
 
+def save_everyone_who_hasnt_answered() -> None:
+    df = pd.read_csv('lxsdata.csv').dropna(subset=['encuesta'])
+    df2 = pd.read_csv('codigos.csv')
+    codigos = []
+    for user in User.query.all():
+        codigos.append(user.lxs400_vc)
+    codigos = codigos[3:]
+    nombres = df[df['Correo'].isin(
+        df2[~df2['codigo'].isin(codigos)]['email'])]['nombre']
+    emails = df[df['Correo'].isin(
+        df2[~df2['codigo'].isin(codigos)]['email'])]['Correo']
+    p_numbers = df[df['Correo'].isin(
+        df2[~df2['codigo'].isin(codigos)]['email'])]['Telefono']
+    codigos_noreg = df2[df2['email'].isin(list(emails))]['codigo']
+    df3 = pd.DataFrame(columns=['nombres', 'codigos', 'emails', 'p_numbers'])
+    df3['nombres'] = list(nombres)
+    df3['codigos'] = list(codigos_noreg)
+    df3['emails'] = list(emails)
+    df3['p_numbers'] = list(p_numbers)
+    df.to_csv('not_registered.csv')
+
+
 def load_answers(csv):
     df = pd.read_csv(csv)
     for row in df.iloc:

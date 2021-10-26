@@ -16,6 +16,7 @@ from app.models import User, Payment
 
 # utils
 from app.utils import save_email_open_times, save_responses
+from app.utils import save_everyone_who_hasnt_answered
 
 
 @bp.route('/')
@@ -86,6 +87,9 @@ def download():
             return send_file('../respuestas.csv')
         elif download == 'questions':
             return send_file('../questions.csv')
+        elif download == 'notreg':
+            save_everyone_who_hasnt_answered()
+            return send_file('../not_registered.csv')
 
     return render_template('main/download.html',
                            form=form,
