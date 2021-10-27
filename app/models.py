@@ -178,6 +178,8 @@ class Section(db.Model):
                 next_question=self.id).first()
             if not took_me_here:
                 return self.id - 1
+            else:
+                return took_me_here.section_id
         return Question.query.get(took_me_here.question_id).section_id
 
 
