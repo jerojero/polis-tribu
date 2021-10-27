@@ -62,9 +62,9 @@ def automated_email():
             everyone = email_code(os.path.join(basedir, f'{file_name}.csv'))
             accumulated_time = 0
             for person in everyone:
-                time = randint(5, 30)
-                accumulated_time += time
                 if not User.query.filter_by(lxs400_vc=person[2]).first():
+                    time = randint(5, 30)
+                    accumulated_time += time
                     send_automated_email(
                         email_name,
                         email_title,
