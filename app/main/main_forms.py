@@ -25,7 +25,8 @@ class EmailForm(MyBaseForm):
 class DownloadForm(MyBaseForm):
     download = SelectField('Nombre de la base de datos a descargar:',
                            choices=[('email', 'Seguimiento de email'),
-                                    ('responses', 'Respuestas de la encuesta'),
+                                    ('responsesx', 'Respuestas de la encuesta (lxs400)'),
+                                    ('responsesd', 'Respuestas de la encuesta (doctores)'),
                                     ('questions', 'Codigos de las preguntas'),
                                     ('notreg', 'Gente no registrada')],
                            validators=[DataRequired()])

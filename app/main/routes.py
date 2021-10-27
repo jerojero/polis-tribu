@@ -27,10 +27,10 @@ from random import randint
 def index():
     return render_template('main/index.html')
 
-
 # @bp.route('/instructions/')
 # def instructions():
 #     return render_template('main/instructions.html')
+
 
 @bp.route('/pixel/<email>/<codigo>')
 def pixel(codigo, email):
@@ -82,16 +82,23 @@ def download():
     if str(current_user.id) not in current_app.config['ADMINISTRATORS']:
         return redirect(url_for('main.index'))
     form = DownloadForm()
-    registered_users = User.query.count() - 3
-    completed_surveys = Payment.query.count() - 3
+    registered_users = User.query.count(
+    ) - len(current_app.config['ADMINISTRATORS'])
+    completed_d = User.query.filter_by(
+        last_question=current_app.config['LASTQ_D']).count()
+    completed_x = User.query.filter_by(
+        last_question=current_app.config['LASTQ_X']).count()
 
     if form.validate_on_submit():
         download = form.download.data
         if download == 'email':
             return send_file('../opened_email.csv')
-        elif download == 'responses':
-            save_responses(current_app)
-            return send_file('../respuestas.csv')
+        elif download == 'responsesd':
+            save_responses(current_app, doctor=True)
+            return send_file('../respuestas_d.csv')
+        elif download == 'responsesx':
+            save_responses(current_app, doctor=False)
+            return send_file('../respuestas_x.csv')
         elif download == 'questions':
             return send_file('../questions.csv')
         elif download == 'notreg':
@@ -101,4 +108,5 @@ def download():
     return render_template('main/download.html',
                            form=form,
                            registered_users=registered_users,
-                           completed_surveys=completed_surveys)
+                           completed_d=completed_d,
+                           completed_x=completed_x)

@@ -76,8 +76,8 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        doctor = True if len(form.verification_code.data) == 7 else False
         vf = form.verification_code.data.replace(" ", "")
+        doctor = True if len(vf) == 7 else False
         lxs400 = Lxs400.query.filter_by(verification_code=vf).first()
         user = User(username=form.username.data,
                     name=norm_names(form.name.data),

@@ -23,4 +23,6 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SENDER = os.environ.get('SENDER')
     ADMINS = os.environ.get('ADMINS').split(',')
+    LASTQ_D = int(os.environ.get('LASTQ_D'))
+    LASTQ_X = int(os.environ.get('LASTQ_X'))
     ADMINISTRATORS = os.environ.get('ADMINISTRATORS').split(',')

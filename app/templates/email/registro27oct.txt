@@ -1,10 +1,8 @@
 Hola {{ name }}!
 
-Junto con saludarte quisiéramos agradecerte nuevamente por tu participación en el proceso deliberativo de Lxs 400. La participación de cada uno de Lxs 400 fue tremendamente importante para el éxito de dicho proyecto.
+Estamos cerca de la elección presidencial, la cual ha sido antecedida por una profunda crisis política, social, así como también sanitaria que dio cuenta de la necesidad de realizar reformas importantes a nuestro sistema de salud, reformas que deben recoger los intereses, opiniones, preferencias, necesidades y distintas perspectivas, tanto de la ciudadanía como de los agentes relevantes que pueden incidir es estas reformas.
 
-Estamos cerca de la elección presidencial, la cual ha sido antecedida por una profunda crisis política, social, así como también sanitaria que dio cuenta de la necesidad de realizar reformas importantes a nuestro sistema de salud, reformas que deben recoger los intereses, opiniones, preferencias, necesidades y distintas perspectivas de la ciudadanía.
-
-Por esta razón te invitamos a participar en esta consulta y proceso deliberativo, el cual permitirá identificar y/o profundizar diferentes alternativas que sean consideradas más deseables para la ciudadanía y así desde esas conclusiones poder elaborar un programa de reformas en salud que no solo refleje lo técnico, sino que también las necesidades y consideraciones de la ciudadanía.
+En este contexto el Colegio Médico de Chile, a través de la Fundación Tribu, ha iniciado un proceso de consulta ciudadana, el cual permitirá identificar y/o profundizar diferentes alternativas que sean consideradas más deseables  y así desde esas conclusiones poder elaborar un programa de reformas en salud que no solo refleje lo técnico sino que también las necesidades y consideraciones de las personas.
 
 
 ¿Cómo funcionará esta consulta?
@@ -21,6 +19,7 @@ Por el solo hecho de contestar la encuesta habrá una compensación de $8.000, l
 
 2.	A continuación, entre quienes contestaron la encuesta se realizará una selección vía sorteo, donde se les invitará participar en un proceso deliberativo, el día y hora será informado una vez realizado el sorteo. Esta etapa concluye con una encuesta de cierre.
 Las personas que participen en esta etapa de la consulta recibirán una compensación de $15.000 a través de transferencia bancaria luego de haber completado y enviado la encuesta de cierre, la fecha de transferencia será informada al momento de la convocatoria.
+
 
 
 

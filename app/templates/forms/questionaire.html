@@ -3,11 +3,11 @@
 
 
 {% block app_content %}
-	{% if current_user.doctor %}
+{# 	{% if current_user.doctor %}
 	<div class="google-form-container">
 		<iframe class="responsive-iframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdR7N6gKdWzHEnpZgv-iPCQf18xqCI2b-RY2LR40PGjuCj1TA/viewform?embedded=true">Loading…</iframe>
 	</div>
-	{% else %}
+	{% else %} #}
 
 	<div class="text-center questionaire">
 		{% for question in section.questions.all() %}
@@ -77,5 +77,5 @@
 			{# {% endif %} #}
 		</div>
 	</div>
-	{% endif %}
+	{# {% endif %} #}
 {% endblock %}

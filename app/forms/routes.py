@@ -6,7 +6,7 @@ from . import bp
 from .forms_forms import create_questionaire, make_question_form
 from .forms_forms import AddQuestionForm, AddAnswerForm, LinkQuestionsForm
 from wtforms import SubmitField
-from app.models import Section, Results, Answer, Payment
+from app.models import Section, Results, Answer, Payment, User
 
 # utils
 from app.utils import create_question, create_section, create_answer
@@ -19,7 +19,6 @@ def questionaire(section_id=None):
     if not section_id:
         section_id = 1
     section = Section.query.filter_by(id=section_id).first()
-    current_app.logger.info(f"Section: {section}")
 
     _form = []
     _form_special = None
@@ -50,6 +49,11 @@ def questionaire(section_id=None):
             next_section = section.id - 1
 
         for question in section.questions.all():
+            last_question = User.query.get(current_user.id).last_question
+            # TODO: Change this to actual question numbers
+            if last_question not in [current_app.config['LASTQ_X'], current_app.config['LASTQ_D']]:
+                User.query.get(current_user.id).last_question = question.id
+                db.session.commit()
             if question.question_type == "hd":
                 continue
             elif question.question_type == "fc":
@@ -86,9 +90,19 @@ def questionaire(section_id=None):
                         getattr(form, f"question_{question.id}").data)
                     answer_text = answerObj.text
                     if answerObj.next_question != 0:
-                        next_section = answerObj.next_question
+                        if answerObj.next_question not in [3, 17]:
+                            if current_user.doctor:
+                                current_app.logger.info(
+                                    'doctor for a mc question')
+                                next_section = answerObj.next_question
+                        else:
+                            next_section = answerObj.next_question
                 else:
                     answer_text = answer
+                    if current_user.doctor:
+                        next_section = question.get_next_question()
+                        if not next_section:
+                            next_section = section.id + 1
                 r = Results(id=result_id, answers=answer, answer_text=answer_text, question_id=question.id,
                             user_id=current_user.id)
                 db.session.add(r)
@@ -101,45 +115,45 @@ def questionaire(section_id=None):
                            section=section, form=form)
 
 
-@bp.route('/add_question/', methods=['GET', 'POST'])
-@login_required
-def add_question():
-    question_form = AddQuestionForm()
-    answer_form = AddAnswerForm()
-    link_form = LinkQuestionsForm()
+# @bp.route('/add_question/', methods=['GET', 'POST'])
+# @login_required
+# def add_question():
+#     question_form = AddQuestionForm()
+#     answer_form = AddAnswerForm()
+#     link_form = LinkQuestionsForm()
 
-    if question_form.validate_on_submit():
+#     if question_form.validate_on_submit():
 
-        title = question_form.title.data
-        question_type = question_form.question_type.data
-        description = question_form.description.data
-        section_id = int(question_form.section.data)
-        optional = question_form.optional.data
-        tail = question_form.optional.data
+#         title = question_form.title.data
+#         question_type = question_form.question_type.data
+#         description = question_form.description.data
+#         section_id = int(question_form.section.data)
+#         optional = question_form.optional.data
+#         tail = question_form.optional.data
 
-        if not Section.query.get(section_id):
-            create_section(tail=tail)
+#         if not Section.query.get(section_id):
+#             create_section(tail=tail)
 
-        create_question(
-            title,
-            question_type,
-            description=description,
-            section_id=section_id,
-            optional=optional)
+#         create_question(
+#             title,
+#             question_type,
+#             description=description,
+#             section_id=section_id,
+#             optional=optional)
 
-    if answer_form.validate_on_submit():
-        current_app.logger.info("answer_form validates")
+#     if answer_form.validate_on_submit():
+#         current_app.logger.info("answer_form validates")
 
-        text = answer_form.text.data
-        associated_question = int(answer_form.associated_question.data)
-        next_question = int(answer_form.next_question.data)
+#         text = answer_form.text.data
+#         associated_question = int(answer_form.associated_question.data)
+#         next_question = int(answer_form.next_question.data)
 
-        create_answer(
-            text, associated_question, next_question=next_question
-        )
+#         create_answer(
+#             text, associated_question, next_question=next_question
+#         )
 
-    if link_form.validate_on_submit():
-        current_app.logger.info("link_form validates")
+#     if link_form.validate_on_submit():
+#         current_app.logger.info("link_form validates")
 
-    return render_template('forms/add_question.html', answer_form=answer_form,
-                           link_form=link_form, question_form=question_form)
+#     return render_template('forms/add_question.html', answer_form=answer_form,
+#                            link_form=link_form, question_form=question_form)

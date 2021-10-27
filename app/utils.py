@@ -43,10 +43,11 @@ def load_questions(csv):
     db.session.commit()
 
 
-def save_responses(current_app):
+def save_responses(current_app, doctor=False):
     users = [user_id[0] for user_id in
              db.session.query(Results.user_id).distinct().all()
-             if str(user_id[0]) not in current_app.config['ADMINISTRATORS']]
+             if (str(user_id[0]) not in current_app.config['ADMINISTRATORS'])
+             and (User.query.get(int(user_id[0])).doctor == doctor)]
     questions = [question_id[0] for question_id in db.session.query(
         Results.question_id).distinct().all()]
     df = pd.DataFrame(index=users, columns=['codigo', 'nombre'] + questions)
@@ -72,7 +73,11 @@ def save_responses(current_app):
     df['nombre'] = nombres
     df['codigo'] = codigos
 
-    df.to_csv('respuestas.csv')
+    if doctor:
+        filename = 'respuestas_d.csv'
+    else:
+        filename = 'respuestas_x.csv'
+    df.to_csv(filename)
 
 
 def get_current_time() -> str:

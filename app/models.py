@@ -92,7 +92,7 @@ class Lxs400(db.Model):
     user = db.relationship('User', backref='lxs400',
                            uselist=False, cascade="all")
 
-    def set_verification_code(self, attempts=0):
+    def set_verification_code(self, attempts=0, doctor=False):
         if self.verification_code:
             return
         verification_code = ''.join([random.choice(
@@ -105,6 +105,11 @@ class Lxs400(db.Model):
                 .first():
             self.set_verification_code(attempts + 1)
 
+        if Lxs400.query.filter(Lxs400.verification_code == 'd' + verification_code).first():
+            self.set_verification_code(attempts + 1)
+
+        if doctor:
+            verification_code = 'd' + verification_code
         self.verification_code = verification_code
 
     def __repr__(self):
@@ -169,7 +174,10 @@ class Section(db.Model):
     def get_previous_section(self):
         took_me_here = Answer.query.filter_by(next_question=self.id).first()
         if not took_me_here:
-            return self.id - 1
+            took_me_here = Question.query.filter_by(
+                next_question=self.id).first()
+            if not took_me_here:
+                return self.id - 1
         return Question.query.get(took_me_here.question_id).section_id
 
 
