@@ -50,7 +50,6 @@ def questionaire(section_id=None):
 
         for question in section.questions.all():
             last_question = User.query.get(current_user.id).last_question
-            # TODO: Change this to actual question numbers
             if last_question not in [current_app.config['LASTQ_X'], current_app.config['LASTQ_D']]:
                 User.query.get(current_user.id).last_question = question.id
                 db.session.commit()
