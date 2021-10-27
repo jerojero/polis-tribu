@@ -21,5 +21,6 @@ class Config(object):
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['polistribu@gmail.com']
+    SENDER = os.environ.get('SENDER')
+    ADMINS = os.environ.get('ADMINS').split(',')
     ADMINISTRATORS = os.environ.get('ADMINISTRATORS').split(',')
