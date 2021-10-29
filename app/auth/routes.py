@@ -43,7 +43,7 @@ def reset_password_request():
         return redirect(url_for('main.index'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user:
             send_password_reset_email(user)
         flash('Revise su correo electrónico con instrucciones para '
@@ -83,7 +83,7 @@ def register():
                     name=norm_names(form.name.data),
                     last_name=norm_names(form.last_name.data),
                     phone=form.phone.data,
-                    email=form.email.data,
+                    email=form.email.data.lower(),
                     doctor=doctor,
                     lxs400=lxs400)
         user.set_password(form.password.data)
