@@ -50,7 +50,12 @@ def save_responses(current_app, doctor=False):
              and (User.query.get(int(user_id[0])).doctor == doctor)]
     questions = [question_id[0] for question_id in db.session.query(
         Results.question_id).distinct().all()]
-    df = pd.DataFrame(index=users, columns=['codigo', 'nombre'] + questions)
+    if doctor:
+        df = pd.DataFrame(index=users, columns=[
+                          'codigo', 'nombre'] + questions)
+    else:
+        df = pd.DataFrame(index=users, columns=[
+                          'codigo', 'nombre', 'folio'] + questions)
     df.index.rename(name='user_id')
 
     for question in questions:

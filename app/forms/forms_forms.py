@@ -150,6 +150,7 @@ def make_question_form(question, user):
         else:
             validators = [Optional()]
         choices = [(x, str(x)) for x in range(11)]
+        choices = choices + [('ns', 'No sabe'), ('nr', 'No responde')]
         # if default:
         #     current_app.logger.info("default")
         #     form = IntegerRangeField(label=title,

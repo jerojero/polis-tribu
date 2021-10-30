@@ -10,13 +10,6 @@
             <form class="form form-horizontal" method="post" role="form" novalidate>
                 {{ form.hidden_tag() }}
 
-
-                <p>Antes de registrarte es necesario que leas los términos y condiciones de uso de la página.</p>
-                <p>
-                    <a href="{{ url_for('main.terms_and_conditions')}}">Lee los términos y condiciones aquí</a>
-                    {{ wtf.form_field(form.consent_bool) }}
-                </p>
-
                 <br><br>
                 <p>
                     Espacios requeridos marcados con asterisco (*)
@@ -31,15 +24,6 @@
                 <p>
                     {{ wtf.form_field(form.last_name) }}
                 </p>
-{#                 <p>
-                    {{ wtf.form_field(form.age) }}
-                </p>
-                <p>
-                    {{ wtf.form_field(form.rut) }}
-                </p>
-                <p>
-                    {{ wtf.form_field(form.gender) }}
-                </p> #}
                 <p>
                     {{ wtf.form_field(form.phone) }}
                 </p>
@@ -57,6 +41,11 @@
                 </p>
                 <p>
                     {{ wtf.form_field(form.verification_code) }}
+                </p>
+                <p>Antes de registrarte es necesario que leas los términos y condiciones de uso de la página. (*)</p>
+                <p>
+                    <a href="{{ url_for('main.terms_and_conditions')}}">Lee los términos y condiciones aquí</a>
+                    {{ wtf.form_field(form.consent_bool) }}
                 </p>
 
                 <br>

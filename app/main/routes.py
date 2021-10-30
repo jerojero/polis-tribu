@@ -86,9 +86,9 @@ def download():
     ) - len(current_app.config['ADMINISTRATORS'])
     # Because we changed the method for counting we add 30
     completed_d = User.query.filter_by(
-        last_question=current_app.config['LASTQ_D']).count() + 30
+        last_question=current_app.config['LASTQ_D']).count()
     completed_x = User.query.filter_by(
-        last_question=current_app.config['LASTQ_X']).count()
+        last_question=current_app.config['LASTQ_X']).count() + 30
 
     if form.validate_on_submit():
         download = form.download.data
