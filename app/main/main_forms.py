@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, PasswordField
-from wtforms import IntegerField, SelectField, TextAreaField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from app.models import User, Lxs400
+from wtforms import StringField, SubmitField
+from wtforms import SelectField
+from wtforms.validators import DataRequired
 
 
 class MyBaseForm(FlaskForm):
@@ -25,6 +24,7 @@ class EmailForm(MyBaseForm):
 class DownloadForm(MyBaseForm):
     download = SelectField('Nombre de la base de datos a descargar:',
                            choices=[('email', 'Seguimiento de email'),
+                                    ('payment', 'Datos para pago'),
                                     ('responsesx', 'Respuestas de la encuesta (lxs400)'),
                                     ('responsesd', 'Respuestas de la encuesta (doctores)'),
                                     ('questions', 'Codigos de las preguntas'),

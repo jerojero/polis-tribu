@@ -20,7 +20,7 @@ def login():
         if user is None:
             user = User.query.filter_by(email=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or passowrd')
+            flash('Usuario o contraseña incorrecta.')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -79,7 +79,7 @@ def register():
         vf = form.verification_code.data.replace(" ", "")
         doctor = True if len(vf) == 7 else False
         lxs400 = Lxs400.query.filter_by(verification_code=vf).first()
-        user = User(username=form.username.data,
+        user = User(username=form.username.data.lower(),
                     name=norm_names(form.name.data),
                     last_name=norm_names(form.last_name.data),
                     phone=form.phone.data,

@@ -16,7 +16,7 @@ from app.models import User
 
 # utils
 from app.utils import save_email_open_times, save_responses
-from app.utils import not_completed, not_registered
+from app.utils import not_completed, not_registered, payment_people
 
 # mail
 from random import randint
@@ -108,6 +108,9 @@ def download():
         elif download == 'notreg':
             not_registered(current_app)
             return send_file('../not_registered.csv')
+        elif download == 'payment':
+            payment_people(current_app)
+            return send_file('../payments.csv')
 
     return render_template('main/download.html',
                            form=form,

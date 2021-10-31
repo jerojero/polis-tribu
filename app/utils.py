@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from app.models import Section, Lxs400, Question, Answer, Results, User
+from app.models import Payment
 from app import db
 from datetime import datetime
 
@@ -99,6 +100,35 @@ def not_registered(current_app, doctor=False):
     df['codigo'] = codigos
 
     df.to_csv('not_registered.csv')
+
+
+def payment_people(current_app, doctor=False):
+    df = pd.DataFrame(columns=['nombre', 'appellido', 'rut', 'banco',
+                               'tipo de cuenta', 'numero de cuenta',
+                               'permiso'])
+
+    first_names, last_names, ruts = [], [], []
+    bancos, tipos, numeros, permisos = [], [], [], []
+
+    for user in Payment.query.all():
+        if user.user_id not in current_app.config['ADMINISTRATORS']:
+            first_names.append(user.first_name)
+            last_names.append(user.last_name)
+            ruts.append(user.rut)
+            bancos.append(user.bank)
+            tipos.append(user.account)
+            numeros.append(user.account_number)
+            permisos.append(user.permission)
+
+    df['nombre'] = first_names
+    df['apellido'] = last_names
+    df['rut'] = ruts
+    df['banco'] = bancos
+    df['tipo de cuenta'] = tipos
+    df['numero de cuenta'] = numeros
+    df['permiso'] = permisos
+
+    df.to_csv('payments.csv')
 
 
 def save_responses(current_app, doctor=False):
