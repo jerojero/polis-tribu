@@ -12,11 +12,11 @@ import io
 import base64
 
 # models
-from app.models import User, Payment
+from app.models import User
 
 # utils
 from app.utils import save_email_open_times, save_responses
-from app.utils import save_everyone_who_hasnt_answered
+from app.utils import not_completed, not_registered
 
 # mail
 from random import randint
@@ -102,8 +102,11 @@ def download():
             return send_file('../respuestas_x.csv')
         elif download == 'questions':
             return send_file('../questions.csv')
+        elif download == 'notcompleted':
+            not_completed(current_app)
+            return send_file('../not_completed.csv')
         elif download == 'notreg':
-            save_everyone_who_hasnt_answered()
+            not_registered(current_app)
             return send_file('../not_registered.csv')
 
     return render_template('main/download.html',

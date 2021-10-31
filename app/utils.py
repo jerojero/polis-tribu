@@ -43,6 +43,64 @@ def load_questions(csv):
     db.session.commit()
 
 
+def not_completed(current_app, doctor=False):
+    user_ids = []
+    last_q = current_app.config['LASTQ_D'] if doctor \
+        else current_app.config['LASTQ_X']
+    len_code = 7 if doctor else 6
+    for user in User.query.all():
+        if len(user.lxs400_vc) == len_code:
+            user_ids.append(user.id)
+    user_ids = user_ids[3:] if not doctor else user_ids
+
+    names = []
+    users = []
+    codes = []
+    emails_user = []
+    emails_lxs = []
+
+    for uid in user_ids:
+        if not Results.query.filter_by(user_id=uid,
+                                       question_id=last_q).first():
+            u = User.query.get(uid)
+            names.append(f"{u.name} {u.last_name}")
+            users.append(u.username)
+            c = u.lxs400_vc
+            codes.append(c)
+            emails_user.append(u.email)
+            if not doctor:
+                emails_lxs.append(Lxs400.query.filter_by(verification_code=c).first().email)
+
+    df = pd.DataFrame(columns=['nombre', 'codigo', 'email de registro', 'email base lxs400'])
+    df['nombre'] = names
+    df['usuario'] = users
+    df['codigo'] = codes
+    df['email de registro'] = emails_user
+    df['email base lxs400'] = emails_lxs
+
+    df.to_csv('not_completed.csv')
+
+
+def not_registered(current_app, doctor=False):
+    data = email_code('codigos.csv')  # TODO: make better, don't be lazy
+    df = pd.DataFrame(columns=["nombre", "email", "codigo"])
+    nombres = []
+    emails = []
+    codigos = []
+    for row in data:
+        codigo = row[2]
+        if not User.query.filter_by(lxs400_vc=codigo).first():
+            nombres.append(row[0])
+            emails.append(row[1])
+            codigos.append(row[2])
+
+    df['nombre'] = nombres
+    df['email'] = emails
+    df['codigo'] = codigos
+
+    df.to_csv('not_registered.csv')
+
+
 def save_responses(current_app, doctor=False):
     users = [user_id[0] for user_id in
              db.session.query(Results.user_id).distinct().all()

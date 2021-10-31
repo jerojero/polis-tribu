@@ -28,6 +28,7 @@ class DownloadForm(MyBaseForm):
                                     ('responsesx', 'Respuestas de la encuesta (lxs400)'),
                                     ('responsesd', 'Respuestas de la encuesta (doctores)'),
                                     ('questions', 'Codigos de las preguntas'),
+                                    ('notcompleted', 'Gente que no ha completado encuesta'),
                                     ('notreg', 'Gente no registrada')],
                            validators=[DataRequired()])
     submit = SubmitField('Descargar')
