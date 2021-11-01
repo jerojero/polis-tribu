@@ -109,7 +109,11 @@ def payment_people(current_app):
     for user in Payment.query.all():
         if str(user.user_id) not in current_app.config['ADMINISTRATORS']:
             uid = user.user_id
+            u = User.query.get(uid)
             payments[uid] = {
+                'id de usuario': uid,
+                'nombre lxs400': f"{u.name} {u.last_name}",
+                'email lxs400': u.email,
                 'nombre': user.first_name,
                 'apellido': user.last_name,
                 'rut': user.rut,
