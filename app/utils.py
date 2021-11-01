@@ -102,8 +102,8 @@ def not_registered(current_app, doctor=False):
     df.to_csv('not_registered.csv')
 
 
-def payment_people(current_app, doctor=False):
-    df = pd.DataFrame(columns=['nombre', 'appellido', 'rut', 'banco',
+def payment_people(current_app):
+    df = pd.DataFrame(columns=['nombre', 'apellido', 'rut', 'banco',
                                'tipo de cuenta', 'numero de cuenta',
                                'permiso'])
 
@@ -111,7 +111,7 @@ def payment_people(current_app, doctor=False):
     bancos, tipos, numeros, permisos = [], [], [], []
 
     for user in Payment.query.all():
-        if user.user_id not in current_app.config['ADMINISTRATORS']:
+        if str(user.user_id) not in current_app.config['ADMINISTRATORS']:
             first_names.append(user.first_name)
             last_names.append(user.last_name)
             ruts.append(user.rut)

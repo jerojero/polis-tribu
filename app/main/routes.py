@@ -12,7 +12,7 @@ import io
 import base64
 
 # models
-from app.models import User
+from app.models import User, Payment
 
 # utils
 from app.utils import save_email_open_times, save_responses
@@ -87,8 +87,7 @@ def download():
     # Because we changed the method for counting we add 30
     completed_d = User.query.filter_by(
         last_question=current_app.config['LASTQ_D']).count()
-    completed_x = User.query.filter_by(
-        last_question=current_app.config['LASTQ_X']).count() + 30
+    completed_x = Payment.query.all().count() - len(current_app.config['ADMINISTRATORS'])
 
     if form.validate_on_submit():
         download = form.download.data
