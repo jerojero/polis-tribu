@@ -70,9 +70,11 @@ def not_completed(current_app, doctor=False):
             codes.append(c)
             emails_user.append(u.email)
             if not doctor:
-                emails_lxs.append(Lxs400.query.filter_by(verification_code=c).first().email)
+                emails_lxs.append(Lxs400.query.filter_by(
+                    verification_code=c).first().email)
 
-    df = pd.DataFrame(columns=['nombre', 'codigo', 'email de registro', 'email base lxs400'])
+    df = pd.DataFrame(columns=['nombre', 'codigo',
+                               'email de registro', 'email base lxs400'])
     df['nombre'] = names
     df['usuario'] = users
     df['codigo'] = codes
@@ -103,32 +105,24 @@ def not_registered(current_app, doctor=False):
 
 
 def payment_people(current_app):
-    df = pd.DataFrame(columns=['uid', 'nombre', 'apellido', 'rut', 'banco',
-                               'tipo de cuenta', 'numero de cuenta',
-                               'permiso'])
-
-    first_names, last_names, ruts, uids = [], [], [], []
-    bancos, tipos, numeros, permisos = [], [], [], []
-
+    payments = {}
     for user in Payment.query.all():
         if str(user.user_id) not in current_app.config['ADMINISTRATORS']:
-            uids.append(user.user_id)
-            first_names.append(user.first_name)
-            last_names.append(user.last_name)
-            ruts.append(user.rut)
-            bancos.append(user.bank)
-            tipos.append(user.account)
-            numeros.append(user.account_number)
-            permisos.append(user.permission)
+            uid = user.user_id
+            payments[uid] = {
+                'nombre': user.first_name,
+                'apellido': user.last_name,
+                'rut': user.rut,
+                'banco': user.bank,
+                'tipo de cuenta': user.account,
+                'numero de cuenta': user.account_number,
+                'permiso': user.permission
+            }
 
-    df['uid'] = uids
-    df['nombre'] = first_names
-    df['apellido'] = last_names
-    df['rut'] = ruts
-    df['banco'] = bancos
-    df['tipo de cuenta'] = tipos
-    df['numero de cuenta'] = numeros
-    df['permiso'] = permisos
+    df = pd.DataFrame.from_dict(payments, orient='index',
+                                columns=['uid', 'nombre', 'apellido', 'rut',
+                                         'banco', 'tipo de cuenta',
+                                         'numero de cuenta', 'permiso'])
 
     df.to_csv('payments.csv')
 
