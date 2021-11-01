@@ -120,7 +120,7 @@ def payment_people(current_app):
             }
 
     df = pd.DataFrame.from_dict(payments, orient='index',
-                                columns=['uid', 'nombre', 'apellido', 'rut',
+                                columns=['nombre', 'apellido', 'rut',
                                          'banco', 'tipo de cuenta',
                                          'numero de cuenta', 'permiso'])
 
@@ -128,6 +128,11 @@ def payment_people(current_app):
 
 
 def save_responses(current_app, doctor=False):
+    if doctor:
+        filename = 'respuestas_d.csv'
+    else:
+        filename = 'respuestas_x.csv'
+
     users = [user_id[0] for user_id in
              db.session.query(Results.user_id).distinct().all()
              if (str(user_id[0]) not in current_app.config['ADMINISTRATORS'])
@@ -162,10 +167,6 @@ def save_responses(current_app, doctor=False):
     df['nombre'] = nombres
     df['codigo'] = codigos
 
-    if doctor:
-        filename = 'respuestas_d.csv'
-    else:
-        filename = 'respuestas_x.csv'
     df.to_csv(filename)
 
 

@@ -46,8 +46,8 @@ class RegistrationForm(MyBaseForm, FlaskForm):
     submit = SubmitField('Registrarse')
 
     def validate_username(self, username):
-        username = username.lower()
-        user = User.query.filter_by(username=username.data).first()
+        username_norm = username.data.lower()
+        user = User.query.filter_by(username=username_norm).first()
         if user is not None:
             raise ValidationError('Este nombre de usuario ya está registrado.'
                                   ' Porfavor elegir otro'

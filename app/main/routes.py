@@ -62,7 +62,19 @@ def automated_email():
             everyone = email_code(os.path.join(basedir, f'{file_name}.csv'))
             accumulated_time = 0
             for person in everyone:
-                if not User.query.filter_by(lxs400_vc=person[2]).first():
+                if not form.todos.data:
+                    if not User.query.filter_by(lxs400_vc=person[2]).first():
+                        time = randint(5, 30)
+                        accumulated_time += time
+                        send_automated_email(
+                            email_name,
+                            email_title,
+                            person[1],
+                            accumulated_time,
+                            verification_code=person[2],
+                            name=person[0],
+                        )
+                else:
                     time = randint(5, 30)
                     accumulated_time += time
                     send_automated_email(
@@ -73,6 +85,7 @@ def automated_email():
                         verification_code=person[2],
                         name=person[0],
                     )
+
     return render_template('main/automated_email.html', form=form)
 
 
@@ -87,7 +100,8 @@ def download():
     # Because we changed the method for counting we add 30
     completed_d = User.query.filter_by(
         last_question=current_app.config['LASTQ_D']).count()
-    completed_x = Payment.query.count() - len(current_app.config['ADMINISTRATORS'])
+    completed_x = Payment.query.count(
+    ) - len(current_app.config['ADMINISTRATORS'])
 
     if form.validate_on_submit():
         download = form.download.data

@@ -1,0 +1,11 @@
+Hola {{ name }}!
+
+Junto con saludarte y esperando que hayas tenido un buen Domingo, queríamos recordarte que ya faltan pocos días para contestar la encuesta. También te comentamos que como lo mencionamos en nuestro primer email, todas y todos quienes contesten antes del mediodía, la compensación se realizará hoy Lunes 01 de Noviembre.  A quienes contesten la encuesta con posterioridad, la transferencia se realizará el día Lunes 8 de Noviembre.
+
+Te agradecemos tu interés y participación en esta consulta ciudadana realizada por el Colegio Médico de Chile.
+
+Si tienes dudas, por favor no dudes en contactarnos al email delibera@tribu.ong o al whatsapp +56 9 7310 3575
+
+Saludos cordiales.
+
+Fundación Tribu
