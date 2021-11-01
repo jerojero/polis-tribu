@@ -103,15 +103,16 @@ def not_registered(current_app, doctor=False):
 
 
 def payment_people(current_app):
-    df = pd.DataFrame(columns=['nombre', 'apellido', 'rut', 'banco',
+    df = pd.DataFrame(columns=['uid', 'nombre', 'apellido', 'rut', 'banco',
                                'tipo de cuenta', 'numero de cuenta',
                                'permiso'])
 
-    first_names, last_names, ruts = [], [], []
+    first_names, last_names, ruts, uids = [], [], [], []
     bancos, tipos, numeros, permisos = [], [], [], []
 
     for user in Payment.query.all():
         if str(user.user_id) not in current_app.config['ADMINISTRATORS']:
+            uids.append(user.user_id)
             first_names.append(user.first_name)
             last_names.append(user.last_name)
             ruts.append(user.rut)
@@ -120,6 +121,7 @@ def payment_people(current_app):
             numeros.append(user.account_number)
             permisos.append(user.permission)
 
+    df['uid'] = uids
     df['nombre'] = first_names
     df['apellido'] = last_names
     df['rut'] = ruts
