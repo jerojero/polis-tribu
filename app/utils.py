@@ -154,16 +154,11 @@ def save_responses(current_app, doctor=False):
                           'codigo', 'nombre', 'folio'] + questions)
     df.index.rename(name='user_id')
 
-    for question in questions:
-        qs = []
-        for user in df.index:
-            r = Results.query.filter_by(
-                question_id=question, user_id=user).first()
-            if r:
-                qs.append(r.answer_text)
-            else:
-                qs.append("")
-        df[question] = qs
+    for answer in Results.query.all():
+        user = answer.user_id
+        if user in users:
+            question = answer.question_id
+            df.loc[user, question] = answer.answer_text
 
     codigos = []
     nombres = []
