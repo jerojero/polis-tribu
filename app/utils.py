@@ -287,6 +287,22 @@ def create_section(tail=False):
     db.session.commit()
 
 
+def export_questions():
+    question_id = []
+    question_type = []
+    question_text = []
+    for question in Question.query.all():
+        if question.question_type not in ['fp', 'hd', 'fc']:
+            question_id.append(question.id)
+            question_type.append(question.question_type)
+            question_text.append(question.question_text)
+
+    df = pd.DataFrame(index=question_id, columns=['tipo', 'texto'])
+    df.index.rename(name='question_id')
+
+    df.to_csv('questions_export.csv')
+
+
 def create_question(
         title,
         question_type,

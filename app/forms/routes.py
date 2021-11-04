@@ -4,12 +4,8 @@ from flask_login import login_required, current_user
 from app import db
 from . import bp
 from .forms_forms import create_questionaire, make_question_form
-from .forms_forms import AddQuestionForm, AddAnswerForm, LinkQuestionsForm
 from wtforms import SubmitField
 from app.models import Section, Results, Answer, Payment, User
-
-# utils
-from app.utils import create_question, create_section, create_answer
 
 
 @bp.route('/questionaire/<int:section_id>', methods=['GET', 'POST'])

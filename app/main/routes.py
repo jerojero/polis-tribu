@@ -17,6 +17,7 @@ from app.models import User, Payment
 # utils
 from app.utils import save_email_open_times, save_responses
 from app.utils import not_completed, not_registered, payment_people
+from app.utils import export_questions
 
 # mail
 from random import randint
@@ -114,7 +115,9 @@ def download():
             save_responses(current_app, doctor=False)
             return send_file('../respuestas_x.csv')
         elif download == 'questions':
-            return send_file('../questions.csv')
+            if not os.path.exists('../questions_export.csv'):
+                export_questions()
+            return send_file('../questions_export.csv')
         elif download == 'notcompleted':
             not_completed(current_app)
             return send_file('../not_completed.csv')
