@@ -295,7 +295,7 @@ def export_questions():
         if question.question_type not in ['fp', 'hd', 'fc']:
             question_id.append(question.id)
             question_type.append(question.question_type)
-            question_text.append(question.question_text)
+            question_text.append(question.title)
 
     df = pd.DataFrame(index=question_id, columns=['tipo', 'texto'])
     df.index.rename(name='question_id')
