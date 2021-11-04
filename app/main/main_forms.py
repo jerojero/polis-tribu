@@ -19,6 +19,7 @@ class EmailForm(MyBaseForm):
                        render_kw={'placeholder':
                                   "codigos"})
     todos = BooleanField('Todos')
+    casi_todos = BooleanField('Todos los que no han completado')
     submit = SubmitField('Enviar')
 
 
