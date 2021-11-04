@@ -15,7 +15,7 @@ import jwt
 
 
 class Results(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     answers = db.Column(db.Text)
     answer_text = db.Column(db.Text)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
