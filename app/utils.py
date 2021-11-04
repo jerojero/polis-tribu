@@ -300,6 +300,9 @@ def export_questions():
     df = pd.DataFrame(index=question_id, columns=['tipo', 'texto'])
     df.index.rename(name='question_id')
 
+    df['tipo'] = question_type
+    df['texto'] = question_text
+
     df.to_csv('questions_export.csv')
 
 
