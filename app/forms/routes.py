@@ -94,7 +94,7 @@ def questionaire(section_id=None):
                 if q:
                     db.session.delete(q)
                 answer = getattr(form, f"question_{question.id}").data
-                if question.question_type == "mc":
+                if question.question_type in ["mc", "rl"]:
                     answerObj = Answer.query.get(
                         getattr(form, f"question_{question.id}").data)
                     answer_text = answerObj.text
@@ -103,6 +103,7 @@ def questionaire(section_id=None):
                             if current_user.doctor:
                                 current_app.logger.info(
                                     'doctor for a mc question')
+                                # BUG HERE FOR QUESTION 30015 for doctors
                                 next_section = answerObj.next_question
                         else:
                             next_section = answerObj.next_question
@@ -116,6 +117,9 @@ def questionaire(section_id=None):
                             user_id=current_user.id)
                 db.session.add(r)
                 db.session.commit()
+
+                if question.id == 30015:
+                    next_section = 4
 
         return redirect(url_for('forms.questionaire',
                                 section_id=next_section))
