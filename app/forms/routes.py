@@ -77,8 +77,13 @@ def questionaire(section_id=None):
                 db.session.add(r)
                 db.session.commit()
             else:
-                if current_user.doctor and question.id == 3005:
-                    continue
+                if current_user.doctor:
+                    if question.id == 3005:
+                        continue
+                else:
+                    if question.id in [30015]:
+                        continue
+
                 result_id = int(f"{current_user.id}00{question.id}")
                 current_app.logger.info(f"Result id: {result_id}")
                 q = Results.query.get(result_id)
