@@ -62,11 +62,11 @@
             		{% endfor %}
 				{% endfor %}
 					{% if prev_section %}
-					{% if section.tail %}
-						<a href="{{ url_for('main.index') }}" class="btn btn-default">Inicio</a>
-					{% else %}
-					<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
-					{% endif %}
+						{% if section.tail %}
+							<a href="{{ url_for('main.index') }}" class="btn btn-default">Inicio</a>
+						{% else %}
+							<a href="{{ url_for('forms.questionaire', section_id=prev_section) }}" class="btn btn-default">Atrás</a>
+						{% endif %}
 					{% endif %}
 					{# {{ form.previous(class="btn btn-default") }} #}
 				{% if not section.tail %}

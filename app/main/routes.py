@@ -75,6 +75,19 @@ def automated_email():
                             verification_code=person[2],
                             name=person[0],
                         )
+                elif form.casi_todos.data:
+                    uid = User.query.filter_by(lxs400_vc=person[2]).first().id
+                    if not Payment.query.filter_by(user_id=uid).first():
+                        time = randint(5, 30)
+                        accumulated_time += time
+                        send_automated_email(
+                            email_name,
+                            email_title,
+                            person[1],
+                            accumulated_time,
+                            verification_code=person[2],
+                            name=person[0],
+                        )
                 else:
                     time = randint(5, 30)
                     accumulated_time += time
@@ -98,11 +111,11 @@ def download():
     form = DownloadForm()
     registered_users = User.query.count(
     ) - len(current_app.config['ADMINISTRATORS'])
-    # Because we changed the method for counting we add 30
     completed_d = User.query.filter_by(
         last_question=current_app.config['LASTQ_D']).count()
-    completed_x = Payment.query.count(
-    ) - len(current_app.config['ADMINISTRATORS'])  # TODO: FIX
+    completed_x = User.query.filter_by(
+        last_question=current_app.config['LASTQ_X']).count(
+    ) - len(current_app.config['ADMINISTRATORS'])
 
     if form.validate_on_submit():
         download = form.download.data
