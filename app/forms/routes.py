@@ -28,10 +28,14 @@ def questionaire(section_id=None):
         elif question.question_type == "fp":
             _form_special = make_question_form(question, current_user)
         else:
-            if current_user.doctor and question.id == 3005:
-                continue
+            if current_user.doctor:
+                if question.id == 3005:
+                    continue
             else:
-                _form.append(make_question_form(question, current_user))
+                if question.id == 30015:
+                    continue
+
+            _form.append(make_question_form(question, current_user))
 
     _form.append(("next", SubmitField("Siguiente")))
 
