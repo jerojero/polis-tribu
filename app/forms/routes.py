@@ -81,7 +81,7 @@ def questionaire(section_id=None):
                     if question.id == 3005:
                         continue
                 else:
-                    if question.id in [30015]:
+                    if question.id == 30015:
                         continue
 
                 result_id = int(f"{current_user.id}00{question.id}")
