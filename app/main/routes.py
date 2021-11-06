@@ -111,8 +111,7 @@ def download():
     form = DownloadForm()
     registered_users = User.query.count(
     ) - len(current_app.config['ADMINISTRATORS'])
-    completed_d = User.query.filter_by(
-        last_question=current_app.config['LASTQ_D']).count()
+    completed_d = Results.query.filter_by(question_id=50001).count()
     completed_x = User.query.filter_by(
         last_question=current_app.config['LASTQ_X']).count(
     ) - len(current_app.config['ADMINISTRATORS'])

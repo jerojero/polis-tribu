@@ -121,6 +121,9 @@ def questionaire(section_id=None):
                 if question.id == 30015:
                     next_section = 4
 
+                if question.id == 50001:
+                    next_section = 24
+
         return redirect(url_for('forms.questionaire',
                                 section_id=next_section))
 

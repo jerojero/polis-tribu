@@ -11,7 +11,7 @@ class MyBaseForm(FlaskForm):
 
 
 class LoginForm(MyBaseForm):
-    username = StringField('Nombre de usuario o email',
+    username = StringField('Nombre de usuario o correo electrónico',
                            validators=[DataRequired()])
     password = PasswordField('Contraseña', validators=[DataRequired()])
     remember_me = BooleanField('Recuérdame')
