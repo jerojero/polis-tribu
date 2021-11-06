@@ -12,7 +12,7 @@ import io
 import base64
 
 # models
-from app.models import User, Payment
+from app.models import User, Payment, Results
 
 # utils
 from app.utils import save_email_open_times, save_responses
