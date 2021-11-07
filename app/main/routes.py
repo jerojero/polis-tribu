@@ -112,9 +112,9 @@ def download():
     registered_users = User.query.count(
     ) - len(current_app.config['ADMINISTRATORS'])
     completed_d = Results.query.filter_by(question_id=50001).count()
-    completed_x = User.query.filter_by(
-        last_question=current_app.config['LASTQ_X']).count(
-    ) - len(current_app.config['ADMINISTRATORS'])
+    completed_x = len([user for user in User.query.filter_by(
+        last_question=current_app.config['LASTQ_X'])
+        if len(user.lxs400_vc) == 6]) - len(current_app.config['ADMINISTRATORS'])
 
     if form.validate_on_submit():
         download = form.download.data
