@@ -92,21 +92,25 @@ class Lxs400(db.Model):
     user = db.relationship('User', backref='lxs400',
                            uselist=False, cascade="all")
 
-    def set_verification_code(self, attempts=0, doctor=False):
+    def set_verification_code(self, attempts=0, doctor=False, easy=False):
         if self.verification_code:
             return
-        verification_code = ''.join([random.choice(
-            string.ascii_letters + string.digits) for _ in range(6)])
+        if not easy:
+            verification_code = ''.join([random.choice(
+                string.ascii_letters + string.digits) for _ in range(6)])
+        else:
+            verification_code = f"{random.choice([1,2,3,4,5,6,7,8,9])}" + "".join([random.choice(
+                string.digits) for _ in range(5)])
         if attempts > 10:
             raise AssertionError(
                 "We have probably run out of verification codes")
 
         if Lxs400.query.filter(Lxs400.verification_code == verification_code) \
                 .first():
-            self.set_verification_code(attempts + 1)
+            self.set_verification_code(attempts + 1, doctor, easy)
 
         if Lxs400.query.filter(Lxs400.verification_code == 'd' + verification_code).first():
-            self.set_verification_code(attempts + 1)
+            self.set_verification_code(attempts + 1, doctor, easy)
 
         if doctor:
             verification_code = 'd' + verification_code
