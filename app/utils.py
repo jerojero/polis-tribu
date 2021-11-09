@@ -139,12 +139,10 @@ def payment_people(current_app):
 def medicos_si(current_app):
     payments = {}
     for result in Results.query.filter_by(question_id=30016):
-        result.answers == str(84):
+        if result.answers == str(84):
             uid = result.user_id
             if str(uid) not in current_app.config['ADMINISTRATORS']:
                 u = User.query.get(uid)
-                v = u.lxs400_vc
-                x = Lxs400.query.filter_by(verification_code=v).first()
                 payments[uid] = {
                     'id de usuario': uid,
                     'email medico': u.email,
