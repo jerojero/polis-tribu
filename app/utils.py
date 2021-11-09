@@ -115,7 +115,7 @@ def payment_people(current_app):
                 'id de usuario': uid,
                 'email lxs400': x.email,
                 'nombre lxs400': x.name,
-                'telefono': user.phone,
+                'telefono': u.phone,
                 'nombre': user.first_name,
                 'apellido': user.last_name,
                 'rut': user.rut,
