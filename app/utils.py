@@ -212,8 +212,9 @@ def save_email_open_times(codigo: str, email: str) -> None:
 
 def save_everyone_who_hasnt_answered() -> None:
     df = pd.read_csv('lxsdata.csv').dropna(subset=['encuesta'])
-    df2 = pd.read_csv('codigos.csv')
-    codigos = []
+    df1 = pd.read_csv('codigos.csv')
+    df3 = pd.read_csv('codigos_nuevos.csv')
+    df2 = pd.concat([df1, df3], axis=0)
     for user in User.query.all():
         codigos.append(user.lxs400_vc)
     codigos = codigos[3:]
