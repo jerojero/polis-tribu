@@ -109,8 +109,9 @@ def payment_people(current_app):
     for user in Payment.query.all():
         if str(user.user_id) not in current_app.config['ADMINISTRATORS']:
             uid = user.user_id
-            u = User.query.get(uid).lxs400_vc
-            x = Lxs400.query.filter_by(verification_code=u).first()
+            u = User.query.get(uid)
+            v = u.lxs400_vc
+            x = Lxs400.query.filter_by(verification_code=v).first()
             payments[uid] = {
                 'id de usuario': uid,
                 'email lxs400': x.email,
