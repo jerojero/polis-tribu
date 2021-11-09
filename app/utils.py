@@ -85,19 +85,19 @@ def not_completed(current_app, doctor=False):
 
 
 def not_registered(current_app, doctor=False):
-    df1 = email_code('codigos.csv')  # TODO: make better, don't be lazy
+    df1 = pd.read_csv('codigos.csv')  # TODO: make better, don't be lazy
     df2 = pd.read_csv('codigos_nuevos.csv')
     data = pd.concat([df1, df2], axis=0)
     df = pd.DataFrame(columns=["nombre", "email", "codigo"])
     nombres = []
     emails = []
     codigos = []
-    for row in data:
-        codigo = row[2]
+    for row in data.iloc:
+        codigo = row['codigo']
         if not User.query.filter_by(lxs400_vc=codigo).first():
-            nombres.append(row[0])
-            emails.append(row[1])
-            codigos.append(row[2])
+            nombres.append(row['nombre'])
+            emails.append(row['email'])
+            codigos.append(codigo)
 
     df['nombre'] = nombres
     df['email'] = emails
