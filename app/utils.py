@@ -85,7 +85,9 @@ def not_completed(current_app, doctor=False):
 
 
 def not_registered(current_app, doctor=False):
-    data = email_code('codigos.csv')  # TODO: make better, don't be lazy
+    df1 = email_code('codigos.csv')  # TODO: make better, don't be lazy
+    df2 = pd.read_csv('codigos_nuevos.csv')
+    data = pd.concat([df1, df2], axis=0)
     df = pd.DataFrame(columns=["nombre", "email", "codigo"])
     nombres = []
     emails = []
