@@ -116,6 +116,7 @@ def payment_people(current_app):
                 'id de usuario': uid,
                 'email lxs400': x.email,
                 'nombre lxs400': x.name,
+                'codigo': v,
                 'telefono': u.phone,
                 'nombre': user.first_name,
                 'apellido': user.last_name,
@@ -128,7 +129,7 @@ def payment_people(current_app):
 
     df = pd.DataFrame.from_dict(payments, orient='index',
                                 columns=['id de usuario', 'email lxs400',
-                                         'nombre lxs400', 'telefono',
+                                         'nombre lxs400', 'codigo', 'telefono',
                                          'nombre', 'apellido', 'rut',
                                          'banco', 'tipo de cuenta',
                                          'numero de cuenta', 'permiso'])
