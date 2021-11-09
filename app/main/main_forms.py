@@ -34,6 +34,8 @@ class DownloadForm(MyBaseForm):
                                     ('questions', 'Codigos de las preguntas'),
                                     ('notcompleted',
                                      'Gente que no ha completado encuesta'),
-                                    ('notreg', 'Gente no registrada')],
+                                    ('notreg', 'Gente no registrada'),
+                                    ('medicos',
+                                     'Medicos que dijeron que si')],
                            validators=[DataRequired()])
     submit = SubmitField('Descargar')

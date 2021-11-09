@@ -17,7 +17,7 @@ from app.models import User, Payment, Results
 # utils
 from app.utils import save_email_open_times, save_responses
 from app.utils import not_completed, not_registered, payment_people
-from app.utils import export_questions
+from app.utils import export_questions, medicos_si
 
 # mail
 from random import randint
@@ -136,6 +136,9 @@ def download():
         elif download == 'notreg':
             not_registered(current_app)
             return send_file('../not_registered.csv')
+        elif download == 'medicos':
+            medicos_si(current_app)
+            return send_file('../medicos_si.csv')
         elif download == 'payment':
             payment_people(current_app)
             return send_file('../payments.csv')

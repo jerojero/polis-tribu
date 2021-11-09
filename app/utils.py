@@ -136,6 +136,29 @@ def payment_people(current_app):
     df.to_csv('payments.csv')
 
 
+def medicos_si(current_app):
+    payments = {}
+    for result in Results.query.filter_by(question_id=30016):
+        result.answers == str(84):
+            uid = result.user_id
+            if str(uid) not in current_app.config['ADMINISTRATORS']:
+                u = User.query.get(uid)
+                v = u.lxs400_vc
+                x = Lxs400.query.filter_by(verification_code=v).first()
+                payments[uid] = {
+                    'id de usuario': uid,
+                    'email medico': u.email,
+                    'nombre medico': f"{u.name} {u.last_name}",
+                    'telefono': u.phone,
+                }
+
+    df = pd.DataFrame.from_dict(payments, orient='index',
+                                columns=['id de usuario', 'email medico',
+                                         'nombre medico', 'telefono'])
+
+    df.to_csv('medicos_si.csv')
+
+
 def save_responses(current_app, doctor=False):
     if doctor:
         filename = 'respuestas_d.csv'
