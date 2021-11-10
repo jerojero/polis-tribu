@@ -148,3 +148,11 @@ def download():
                            registered_users=registered_users,
                            completed_d=completed_d,
                            completed_x=completed_x)
+
+
+@bp.route('/files/<name>', methods=['GET'])
+@login_required
+def files(name):
+    if str(current_user.id) not in current_app.config['ADMINISTRATORS']:
+        return redirect(url_for('main.index'))
+    return send_file(f'../{name}')
