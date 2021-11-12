@@ -13,7 +13,10 @@ from app.models import Section, Results, Answer, Payment, User
 @login_required
 def questionaire(section_id=None):
     if not section_id:
-        section_id = 1
+        if current_user.selected:
+            section_id = 25
+        else:
+            section_id = 1
     section = Section.query.filter_by(id=section_id).first()
 
     _form = []
@@ -103,7 +106,6 @@ def questionaire(section_id=None):
                             if current_user.doctor:
                                 current_app.logger.info(
                                     'doctor for a mc question')
-                                # BUG HERE FOR QUESTION 30015 for doctors
                                 next_section = answerObj.next_question
                         else:
                             next_section = answerObj.next_question
@@ -129,47 +131,3 @@ def questionaire(section_id=None):
 
     return render_template('forms/questionaire.html',
                            section=section, form=form)
-
-
-# @bp.route('/add_question/', methods=['GET', 'POST'])
-# @login_required
-# def add_question():
-#     question_form = AddQuestionForm()
-#     answer_form = AddAnswerForm()
-#     link_form = LinkQuestionsForm()
-
-#     if question_form.validate_on_submit():
-
-#         title = question_form.title.data
-#         question_type = question_form.question_type.data
-#         description = question_form.description.data
-#         section_id = int(question_form.section.data)
-#         optional = question_form.optional.data
-#         tail = question_form.optional.data
-
-#         if not Section.query.get(section_id):
-#             create_section(tail=tail)
-
-#         create_question(
-#             title,
-#             question_type,
-#             description=description,
-#             section_id=section_id,
-#             optional=optional)
-
-#     if answer_form.validate_on_submit():
-#         current_app.logger.info("answer_form validates")
-
-#         text = answer_form.text.data
-#         associated_question = int(answer_form.associated_question.data)
-#         next_question = int(answer_form.next_question.data)
-
-#         create_answer(
-#             text, associated_question, next_question=next_question
-#         )
-
-#     if link_form.validate_on_submit():
-#         current_app.logger.info("link_form validates")
-
-#     return render_template('forms/add_question.html', answer_form=answer_form,
-#                            link_form=link_form, question_form=question_form)

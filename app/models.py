@@ -53,6 +53,7 @@ class User(UserMixin, db.Model):
     has_visited = db.Column(db.Boolean)
     last_question = db.Column(db.Integer)
     contact = db.Column(db.String(64))
+    selected = db.Column(db.Boolean)
     lxs400_vc = db.Column(db.String(64),
                           db.ForeignKey('lxs400.verification_code'))
     result = db.relationship('Results', backref='user',
