@@ -14,7 +14,8 @@ from app.models import Section, Results, Answer, Payment, User
 def questionaire(section_id=None):
     if not section_id:
         if current_user.selected:
-            section_id = 25
+            # section_id = 25  # This should go live on sunday.
+            section_id = 1  # Delete on sunday
         else:
             section_id = 1
     section = Section.query.filter_by(id=section_id).first()
