@@ -28,10 +28,6 @@ from random import randint
 def index():
     return render_template('main/index.html')
 
-# @bp.route('/instructions/')
-# def instructions():
-#     return render_template('main/instructions.html')
-
 
 @bp.route('/pixel/<email>/<codigo>')
 def pixel(codigo, email):
@@ -45,6 +41,14 @@ def pixel(codigo, email):
 @bp.route('/terms_and_conditions/')
 def terms_and_conditions():
     return render_template('main/terms_and_conditions.html')
+
+
+@bp.route('/deliberacion/')
+@login_required
+def deliberation():
+    if not current_user.selected:
+        return redirect(url_for('main.index'))
+    return render_template('main/deliberation.html')
 
 
 @bp.route('/automated_email/', methods=['GET', 'POST'])

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<h1>
+	Deliberación en la plataforma de Stanford<br>
+</h1>
+<br>
+<br>
+<p>
+	En el siguiente link usted será redireccionado a otra plataforma donde se llevará a cabo la deliberación, al momento de registrarse usted tendrá que ingresar <b>como nombre de pantalla el siguiente número</b> y como <b>correo el correo electrónico</b> con el que usted se ha registrado. Es muy importante que usted <b>siga estas instrucciones</b> ya que nos facilitará mucho el proceso.
+</p>
+<p>
+	Para su conveniencia le indicamos ambos a continuación:
+</p>
+<p>
+	<b>Nombre de pantalla:</b> {{ current_user.id }}
+	<b>Correo electrónico:</b> {{ current_user.email }}
+<p>
+{% if current_user.is_anonymous %}
+<div class="text-center">
+	<a href="{{ url_for('forms.questionaire') }}" class="btn btn-lg btn-info">Haga click acá para ir a la plataforma de deliberación</a>
+</div>
+
+{% endif %}
+{% endblock %}
