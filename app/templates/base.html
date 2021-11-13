@@ -44,6 +44,12 @@
 		{{ 'active' if request.path == url_for('forms.questionaire') else '' }}" >
 		<i class="fa fa-person-booth"></i> <span class="disappear">Cuestionario</span></a>
 
+		{% if current_user.selected %}
+		<a href="{{ url_for('main.deliberation') }}" class="btn btn-info btn-lg
+		{{ 'active' if request.path == url_for('main.deliberation') else '' }}" >
+		<i class="fa fa-comments"></i> <span class="disappear">Deliberación</span></a>
+		{% endif %}
+
 		<a href="{{ url_for('auth.logout') }}" class="btn btn-info btn-lg
 		{{ 'active' if request.path == url_for('auth.logout') else '' }}">
 		<i class="fa fa-user-times"></i> <span class="disappear">Cerrar Sesión</span></a>
