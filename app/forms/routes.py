@@ -88,6 +88,8 @@ def questionaire(section_id=None):
                 if current_user.doctor:
                     if question.id == 3005:
                         continue
+                    if question.id == 30016:
+                        continue
                 else:
                     if question.id == 30015:
                         continue
