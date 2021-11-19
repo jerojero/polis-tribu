@@ -205,18 +205,15 @@ def save_second_survey(current_app):
              db.session.query(Results.user_id).distinct().all()
              if (str(user_id[0]) not in current_app.config['ADMINISTRATORS'])
              and User.query.get(int(user_id[0])).selected]
-    questions = [question_id[0] for question_id in db.session.query(
-        Results.question_id).distinct().all()]
+    questions = [30017, 30018, 30019, 30020,
+                 40042, 40043, 40044, 40045, 40046, 40047]
     df = pd.DataFrame(index=users, columns=[
         'codigo', 'nombre'] + questions)
 
     df.index.rename(name='user_id')
 
-    question_ids = [30017, 30018, 30019, 30020,
-                    40042, 40043, 40044, 40045, 40046, 40047]
-
     for answer in Results.query.all():
-        if answer.question_id not in question_ids:
+        if answer.question_id not in questions:
             continue
         user = answer.user_id
         if user in users:
