@@ -31,6 +31,8 @@ class DownloadForm(MyBaseForm):
                                      'Respuestas de la encuesta (lxs400)'),
                                     ('responsesd',
                                      'Respuestas de la encuesta (medicos)'),
+                                    ('responses2',
+                                     'Respuestas de la segunda encuesta'),
                                     ('questions', 'Codigos de las preguntas'),
                                     ('notcompleted',
                                      'Gente que no ha completado encuesta'),

@@ -18,6 +18,7 @@ from app.models import User, Payment, Results
 from app.utils import save_email_open_times, save_responses
 from app.utils import not_completed, not_registered, payment_people
 from app.utils import export_questions, medicos_si
+from app.utils import save_second_survey
 
 # mail
 from random import randint
@@ -130,6 +131,9 @@ def download():
         elif download == 'responsesx':
             save_responses(current_app, doctor=False)
             return send_file('../respuestas_x.csv')
+        elif download == 'responses2':
+            save_second_survey(current_app)
+            return send_file('../segunda_encuesta.csv')
         elif download == 'questions':
             if not os.path.exists('../questions_export.csv'):
                 export_questions()
