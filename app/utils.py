@@ -198,6 +198,43 @@ def save_responses(current_app, doctor=False):
     df.to_csv(filename)
 
 
+def save_second_survey(current_app):
+    filename = "segunda_encuesta.csv"
+
+    users = [user_id[0] for user_id in
+             db.session.query(Results.user_id).distinct().all()
+             if (str(user_id[0]) not in current_app.config['ADMINISTRATORS'])
+             and User.query.get(int(user_id[0])).selected]
+    questions = [question_id[0] for question_id in db.session.query(
+        Results.question_id).distinct().all()]
+    df = pd.DataFrame(index=users, columns=[
+        'codigo', 'nombre'] + questions)
+
+    df.index.rename(name='user_id')
+
+    question_ids = [30017, 30018, 30019, 30020,
+                    40042, 40043, 40044, 40045, 40046, 40047]
+
+    for answer in Results.query.all():
+        if answer.question_id not in question_ids:
+            continue
+        user = answer.user_id
+        if user in users:
+            question = answer.question_id
+            df.loc[user, question] = answer.answer_text
+
+    codigos = []
+    nombres = []
+    for user in df.index:
+        codigos.append(User.query.get(user).lxs400_vc)
+        nombres.append(User.query.get(
+            user).name + " " + User.query.get(user).last_name)
+    df['nombre'] = nombres
+    df['codigo'] = codigos
+
+    df.to_csv(filename)
+
+
 def get_current_time() -> str:
     return datetime.utcnow().strftime('%d-%m-%YT%H:%M:%S')
 
