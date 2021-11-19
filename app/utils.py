@@ -186,6 +186,18 @@ def save_responses(current_app, doctor=False):
             question = answer.question_id
             df.loc[user, question] = answer.answer_text
 
+    if not doctor:
+        df2 = pd.read_csv('base_folio.csv')
+        df2.dropna(subset=['Correo'], inplace=True)
+        for u in df.iloc:
+            c = u['Correo']
+            lxs = Lxs400.query.filter_by(email=c).first()
+            vf = lxs.verification_code
+            us = User.query.filter_by(lxs400_vc=vf).first()
+            if us:
+                f = u['folio']
+                df.loc[df['codigo'] == c]['folio'] = f
+
     codigos = []
     nombres = []
     for user in df.index:
